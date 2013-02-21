@@ -26,5 +26,5 @@
 	<source path='client' />
 	<source path='shared' />
 
-	<entry-point class="triv.client.ProgramEntry" />
+	<entry-point class="triv.client.view.ProgramEntry" />
 </module>
