@@ -1,7 +1,7 @@
-package triv.client.model.compiler.strategy.lexer;
+package triv.client.model.strategy.lexer;
 
-import triv.client.model.compiler.strategy.interfaces.*;
 import triv.client.model.compiler.Symbol;
+import triv.client.model.strategy.interfaces.*;
 
 public class TRIVLexerStrategy implements LexerStrategy
 {
@@ -21,9 +21,8 @@ public class TRIVLexerStrategy implements LexerStrategy
     symbolValue = "";
     
     if (source.length() > 0) {
-    	    	  		
+    	
     	if (patternStrategy.hasId()) {
-    		
   	  	symbolValue = identifier();
   			
   			if (isBoolean(symbolValue)) {
@@ -54,7 +53,6 @@ public class TRIVLexerStrategy implements LexerStrategy
   		  symbol = new Symbol(punctuator(c), c.toString());
   		}
     }
-    System.out.println(symbol);
     setCurrentSymbol(symbol);
 	}
     

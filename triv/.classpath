@@ -11,5 +11,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/triv/war/WEB-INF/lib/guava-14.0-rc2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-gwt-14.0-rc2.jar" sourcepath="war/WEB-INF/lib/guava-14.0-rc2-sources.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

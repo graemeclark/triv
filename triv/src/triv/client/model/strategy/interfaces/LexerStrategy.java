@@ -1,4 +1,4 @@
-package triv.client.model.compiler.strategy.interfaces;
+package triv.client.model.strategy.interfaces;
 
 import triv.client.model.compiler.Symbol;
 

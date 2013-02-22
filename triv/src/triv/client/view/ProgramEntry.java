@@ -2,8 +2,6 @@ package triv.client.view;
 
 import triv.client.presenter.ProgramEntryPresenter;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.reflect.ClassPath.ClassInfo;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.dom.client.Style.Unit;
@@ -34,23 +32,24 @@ public class ProgramEntry implements EntryPoint
 		mainPanel.setWidgetLeftWidth(parserComboBox, 43.0, Unit.PX, 65.0, Unit.PX);
 		mainPanel.setWidgetTopHeight(parserComboBox, 25.0, Unit.PX, 26.0, Unit.PX);
 		
-		ImmutableSet<ClassInfo> parsers = presenter.getParsers();
+		/*ImmutableSet<ClassInfo> parsers = presenter.getParsers();
 		
 		for (ClassInfo c : parsers) {
 			
-			parserComboBox.addItem(c.getSimpleName());
+			parserComboBox.addItem(c.getName());
 			
-		}
+		}*/
 		
-		parserComboBox.setVisibleItemCount(parsers.size());
-		parserComboBox.addChangeHandler(new ChangeHandler()
+		//parserComboBox.setVisibleItemCount(parsers.size());
+		
+		/*parserComboBox.addChangeHandler(new ChangeHandler()
 		{
 			public void onChange(ChangeEvent event)
 			{
 				int current = parserComboBox.getSelectedIndex();
 				presenter.updateParser(parserComboBox.getItemText(current));
 			}
-		});
+		});*/
 
 	}
 }

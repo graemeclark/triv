@@ -2,21 +2,17 @@ package triv.client.presenter;
 
 import java.io.IOException;
 
-import triv.client.view.ProgramEntry;
 import triv.client.model.compiler.Compiler;
-import triv.client.model.compiler.strategy.interfaces.ParserStrategy;
-
-import com.google.common.collect.ImmutableSet;
-import com.google.common.reflect.ClassPath;
-import com.google.common.reflect.ClassPath.ClassInfo;
+import triv.client.model.strategy.interfaces.ParserStrategy;
+import triv.client.view.ProgramEntry;
 
 public class ProgramEntryPresenter
 {
 	
-	Compiler compiler = new Compiler();
-	ProgramEntry entry = new ProgramEntry();
+	public Compiler compiler = new Compiler();
+	//ProgramEntry entry = new ProgramEntry();
 	
-	public ImmutableSet<ClassInfo> getParsers()
+	/*public ImmutableSet<ClassInfo> getParsers()
 	{
 		
 		ImmutableSet<ClassInfo> ci = null;
@@ -24,7 +20,7 @@ public class ProgramEntryPresenter
 		
 		try {
 			ClassPath cp = ClassPath.from(c);
-			ci = cp.getTopLevelClasses("triv.client.model.compiler.strategy.lexer");
+			ci = cp.getTopLevelClasses("triv.client.model.compiler.strategy.parser");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -41,13 +37,13 @@ public class ProgramEntryPresenter
 			parser = (ParserStrategy) Class.forName(className).newInstance();
 		}
 		catch (InstantiationException e) {
-			e.printStackTrace();
+			System.out.println(e);
 		}
 		catch (IllegalAccessException e) {
-			e.printStackTrace();
+			System.out.println(e);
 		}
 		catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e);
 		}
 		
 		if (parser != null) {
@@ -58,6 +54,6 @@ public class ProgramEntryPresenter
 			System.exit(0);
 		}
 		
-	}
+	}*/
 
 }

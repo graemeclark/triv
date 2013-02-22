@@ -1,10 +1,10 @@
-package triv.client.model.compiler.strategy.parser;
+package triv.client.model.strategy.parser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import triv.client.model.compiler.strategy.interfaces.*;
 import triv.client.model.compiler.*;
+import triv.client.model.strategy.interfaces.*;
 
 public class TRIVParserStrategy implements ParserStrategy
 {
@@ -21,15 +21,14 @@ public class TRIVParserStrategy implements ParserStrategy
 		
 	}
 
-	public void parse(LexerStrategy l, String source)
+	public List<String> parse(LexerStrategy l, String source)
 	{
 
 		
 		lex = l;
 		lex.initialise(source);
 		expression();
-		System.out.println(symbolTable);
-		System.out.println(codeVector);
+		return codeVector;
 		
 	}
 

@@ -1,11 +1,13 @@
 package triv.client.model.compiler;
 
-import triv.client.model.compiler.strategy.interfaces.*;
+import java.util.List;
+
+import triv.client.model.strategy.interfaces.*;
 
 public class Compiler
 {
 	
-	private ParserStrategy parser;
+	public ParserStrategy parser;
 	private LexerStrategy lex;
 	
 	public void setParserStrategy(ParserStrategy p)
@@ -29,10 +31,10 @@ public class Compiler
 		
 	}
 	
-	public void compile(String source)
+	public List<String> compile(String source)
 	{
 		
-		parser.parse(lex, source);
+		return parser.parse(lex, source);
 		
 	}
 

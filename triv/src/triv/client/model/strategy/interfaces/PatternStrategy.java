@@ -1,6 +1,4 @@
-package triv.client.model.compiler.strategy.interfaces;
-
-import java.util.regex.Matcher;
+package triv.client.model.strategy.interfaces;
 
 public interface PatternStrategy
 {
@@ -30,7 +28,5 @@ public interface PatternStrategy
 	public String matchingId();
 	
 	public String matchingNum();
-	
-	public Matcher getId();
 
 }
