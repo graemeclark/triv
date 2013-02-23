@@ -1,0 +1,2 @@
+serviceClass: triv.client.IOService
+path: DD2697D8DA41EB35C5DEC33AD433C670.gwt.rpc

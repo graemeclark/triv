@@ -16,17 +16,14 @@
 	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
 	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
-	
-	<inherits name="com.google.common.collect.Collect" />
 
 	<!-- Other module inherits                                      -->
 
 	<!-- Specify the app entry point class.                         -->
-	<entry-point class='triv.client.Triv' />
-
+    <entry-point class='triv.client.view.ProgramEntry' />
+    
 	<!-- Specify the paths for translatable code                    -->
 	<source path='client' />
 	<source path='shared' />
 
-	<entry-point class="triv.client.view.ProgramEntry" />
 </module>

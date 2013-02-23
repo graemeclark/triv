@@ -8,7 +8,7 @@ import triv.client.model.strategy.interfaces.*;
 
 public class TRIVParserStrategy implements ParserStrategy
 {
-	
+
 	protected LexerStrategy lex;
 	protected SymbolTable symbolTable;
 	protected List<String> codeVector;

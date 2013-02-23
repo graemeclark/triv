@@ -150,7 +150,6 @@ public class TRIVLexerStrategy implements LexerStrategy
 	{
 
 		System.out.println(msg);
-		System.exit(0);
 		
 	}
 	
