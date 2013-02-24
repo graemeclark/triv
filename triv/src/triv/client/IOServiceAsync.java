@@ -6,9 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface IOServiceAsync
 {
-	
-	void populateComboBox(String componentName, AsyncCallback<List<String>> callback);
-	
-	//void instantiateParser(String className, AsyncCallback<ParserStrategy> callback);
-	
+	void populateParsers(AsyncCallback<List<String>> callback);
+	void populateLexers(AsyncCallback<List<String>> callback);
+	void populatePatterns(AsyncCallback<List<String>> callback);
 }

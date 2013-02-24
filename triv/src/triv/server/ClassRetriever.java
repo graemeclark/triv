@@ -16,67 +16,96 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class ClassRetriever extends RemoteServiceServlet implements IOService
 {
-	
-	private String requiredComponent;
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<String> populateComboBox(String componentName)
-	{
-		
-		requiredComponent = componentName;
-			
+	public List<String> populateParsers()
+	{					
 		List<String> classNames = (List<String>) AccessController.doPrivileged(new PrivilegedAction() {
 
 		  @Override
 		  public Object run()
 		  {
-
 		  	List<String> classNames = new ArrayList<String>();
 			  ClassLoader c = this.getClass().getClassLoader();
 			  ImmutableSet<ClassInfo> classes = null;
 			
 			  try {
 				  ClassPath cp = ClassPath.from(c);
-				  classes = cp.getTopLevelClasses("triv.client.model.strategy." + requiredComponent);
+				  classes = cp.getTopLevelClasses("triv.client.model.strategy.parser");
 			  } catch (IOException e) {
 				  e.printStackTrace();
 			  }
-			
 			  if (classes != null) {
 				  for (ClassInfo info : classes) {
+				  	
 					  classNames.add(info.getName());					
 				  }
 			  }
-			  return classNames;
-			  
-		  }
-		  
+			  return classNames;			  
+		  }	  
 		});
-		return classNames;
-		
+		return classNames;		
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> populateLexers()
+	{					
+		List<String> classNames = (List<String>) AccessController.doPrivileged(new PrivilegedAction() {
 
-	/*@Override
-	public ParserStrategy instantiateParser(String className)
-	{
-		
-		ParserStrategy parser = null;
-		
-		try {
-			parser = (ParserStrategy) Class.forName(className).newInstance();
-		}
-		catch (InstantiationException e) {
-			System.out.println(e);
-		}
-		catch (IllegalAccessException e) {
-			System.out.println(e);
-		}
-		catch (ClassNotFoundException e) {
-			System.out.println(e);
-		}
-		return parser;
-		
-	}*/
+		  @Override
+		  public Object run()
+		  {
+		  	List<String> classNames = new ArrayList<String>();
+			  ClassLoader c = this.getClass().getClassLoader();
+			  ImmutableSet<ClassInfo> classes = null;
+			
+			  try {
+				  ClassPath cp = ClassPath.from(c);
+				  classes = cp.getTopLevelClasses("triv.client.model.strategy.lexer");
+			  } catch (IOException e) {
+				  e.printStackTrace();
+			  }
+			  if (classes != null) {
+				  for (ClassInfo info : classes) {
+				  	
+					  classNames.add(info.getName());					
+				  }
+			  }
+			  return classNames;			  
+		  }	  
+		});
+		return classNames;		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> populatePatterns()
+	{					
+		List<String> classNames = (List<String>) AccessController.doPrivileged(new PrivilegedAction() {
 
+		  @Override
+		  public Object run()
+		  {
+		  	List<String> classNames = new ArrayList<String>();
+			  ClassLoader c = this.getClass().getClassLoader();
+			  ImmutableSet<ClassInfo> classes = null;
+			
+			  try {
+				  ClassPath cp = ClassPath.from(c);
+				  classes = cp.getTopLevelClasses("triv.client.model.strategy.pattern");
+			  } catch (IOException e) {
+				  e.printStackTrace();
+			  }
+			  if (classes != null) {
+				  for (ClassInfo info : classes) {
+				  	
+					  classNames.add(info.getName());					
+				  }
+			  }
+			  return classNames;			  
+		  }	  
+		});
+		return classNames;		
+	}
 }

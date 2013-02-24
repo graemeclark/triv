@@ -12,9 +12,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("io")
 public interface IOService extends RemoteService
 {
-	
-	List<String> populateComboBox(String componentName);
-	
-	//ParserStrategy instantiateParser(String className);
-	
+	List<String> populateParsers();
+	List<String> populateLexers();
+	List<String> populatePatterns();
 }

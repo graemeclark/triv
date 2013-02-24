@@ -20,11 +20,14 @@ public class GetPackageListTest
 		
 		try {
 			ClassPath cp = ClassPath.from(c);
-			ci = cp.getTopLevelClasses("triv.client.model.compiler.strategy.lexer");
+			ci = cp.getTopLevelClasses("triv.client.model.strategy.lexer");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
+		for (ClassInfo info : ci)
+			System.out.println(info.getName());
+
 		assertEquals(ci.size(), 1);
 		
 	}
@@ -38,11 +41,12 @@ public class GetPackageListTest
 		
 		try {
 			ClassPath cp = ClassPath.from(c);
-			ci = cp.getTopLevelClasses("triv.client.model.compiler.strategy.parser");
+			ci = cp.getTopLevelClasses("triv.client.model.strategy.parser");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		for (ClassInfo info : ci)
+			System.out.println(info.getName());
 		assertEquals(ci.size(), 1);
 		
 	}
@@ -56,11 +60,12 @@ public class GetPackageListTest
 		
 		try {
 			ClassPath cp = ClassPath.from(c);
-			ci = cp.getTopLevelClasses("triv.client.model.compiler.strategy.pattern");
+			ci = cp.getTopLevelClasses("triv.client.model.strategy.pattern");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		for (ClassInfo info : ci)
+			System.out.println(info.getName());
 		assertEquals(ci.size(), 1);
 		
 	}

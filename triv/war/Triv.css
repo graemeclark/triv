@@ -32,3 +32,10 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+.compile {
+	color: Black;
+	font-variant: normal;
+	font-style: normal;
+	font-weight: bold;
+	background-color: Red;
+}

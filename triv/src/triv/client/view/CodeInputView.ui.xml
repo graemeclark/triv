@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+        xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  <g:VerticalPanel horizontalAlignment="ALIGN_CENTER">
+    <g:Cell horizontalAlignment="ALIGN_CENTER">
+  	    <g:Label text="TRIV"/>
+  	</g:Cell>
+  <g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">	
+  	<g:Cell horizontalAlignment="ALIGN_LEFT">
+  		<g:ListBox ui:field="parser"/>
+  	</g:Cell>
+  	<g:Cell horizontalAlignment="ALIGN_CENTER">
+  		<g:ListBox ui:field="lexer"/>
+  	</g:Cell>
+  	<g:Cell horizontalAlignment="ALIGN_RIGHT">
+  		<g:ListBox ui:field="pattern"/>
+  	</g:Cell>
+  </g:HorizontalPanel>
+  	
+  	<g:Cell horizontalAlignment="ALIGN_CENTER">
+  		<g:TextArea ui:field="code" width="360px" height="175px"/>
+  	</g:Cell>
+  	
+  	<g:Cell horizontalAlignment="ALIGN_CENTER">
+  		<g:Button ui:field="btnCompile" text="Compile"/>
+  	</g:Cell>
+  </g:VerticalPanel>
+
+  
+</ui:UiBinder>
+
