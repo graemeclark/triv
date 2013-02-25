@@ -7,17 +7,6 @@
     <g:Cell horizontalAlignment="ALIGN_CENTER">
   	    <g:Label text="TRIV"/>
   	</g:Cell>
-  <g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">	
-  	<g:Cell horizontalAlignment="ALIGN_LEFT">
-  		<g:ListBox ui:field="parser"/>
-  	</g:Cell>
-  	<g:Cell horizontalAlignment="ALIGN_CENTER">
-  		<g:ListBox ui:field="lexer"/>
-  	</g:Cell>
-  	<g:Cell horizontalAlignment="ALIGN_RIGHT">
-  		<g:ListBox ui:field="pattern"/>
-  	</g:Cell>
-  </g:HorizontalPanel>
   	
   	<g:Cell horizontalAlignment="ALIGN_CENTER">
   		<g:TextArea ui:field="code" width="360px" height="175px"/>
@@ -26,8 +15,11 @@
   	<g:Cell horizontalAlignment="ALIGN_CENTER">
   		<g:Button ui:field="btnCompile" text="Compile"/>
   	</g:Cell>
+  	
+  	<g:Cell horizontalAlignment="ALIGN_CENTER">
+  		<g:Label ui:field="error" width="360px"/>
+  	</g:Cell>
+  	
   </g:VerticalPanel>
 
-  
 </ui:UiBinder>
-

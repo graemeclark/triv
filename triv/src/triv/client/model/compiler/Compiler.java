@@ -2,8 +2,7 @@ package triv.client.model.compiler;
 
 import java.util.List;
 
-import com.google.gwt.user.client.Window;
-
+import triv.client.model.runtime.types.CodeVectorType;
 import triv.client.model.strategy.interfaces.*;
 import triv.client.model.strategy.lexer.TRIVLexerStrategy;
 import triv.client.model.strategy.parser.TRIVParserStrategy;
@@ -17,7 +16,7 @@ public class Compiler
 	
 	public Compiler()
 	{	
-		//setParserStrategy(new TRIVParserStrategy());
+		setParserStrategy(new TRIVParserStrategy());
 		setLexerStrategy(new TRIVLexerStrategy());
 		setPatternStrategy(new TRIVPatternStrategy());		
 	}
@@ -26,7 +25,7 @@ public class Compiler
 	{
 		
 		parser = p;
-		Window.alert(parser.toString());
+		
 	}
 	
 	public void setLexerStrategy(LexerStrategy l)
@@ -43,7 +42,8 @@ public class Compiler
 		
 	}
 	
-	public List<String> compile(String source)
+	public List<CodeVectorType> compile(String source)
+			throws SymbolNotFoundException, IllegalCharacterException
 	{
 		
 		return parser.parse(lex, source);

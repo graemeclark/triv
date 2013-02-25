@@ -16,6 +16,9 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import triv.client.IOService;
 import triv.client.IOServiceAsync;
 import triv.client.model.compiler.Compiler;
+import triv.client.model.compiler.IllegalCharacterException;
+import triv.client.model.compiler.SymbolNotFoundException;
+import triv.client.model.runtime.types.CodeVectorType;
 
 public class InputPresenter extends
 	Presenter<InputPresenter.InputView, InputPresenter.InputProxy>
@@ -45,7 +48,8 @@ public class InputPresenter extends
 	}
 	
 	@Override
-	public List<String> compile(String source)
+	public List<CodeVectorType> compile(String source)
+			throws SymbolNotFoundException, IllegalCharacterException
 	{
 		return compiler.compile(source);
 	}

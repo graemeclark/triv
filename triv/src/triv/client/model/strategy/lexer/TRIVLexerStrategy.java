@@ -1,6 +1,8 @@
 package triv.client.model.strategy.lexer;
 
+import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.Symbol;
+import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.model.strategy.interfaces.*;
 
 public class TRIVLexerStrategy implements LexerStrategy
@@ -12,9 +14,8 @@ public class TRIVLexerStrategy implements LexerStrategy
 	private   Symbol          currentSymbol;
   
   @Override
-	public void nextSymbol()
+	public void nextSymbol() throws IllegalCharacterException
 	{
-
   	Character c;
   	String symbolValue = "";
   	Symbol symbol = null;    	
@@ -30,14 +31,13 @@ public class TRIVLexerStrategy implements LexerStrategy
     			symbol = new Symbol(value);
   			}
   			
-  			if (isReserved(symbolValue)) {
+  			else if (isReserved(symbolValue)) {
   				symbol = new Symbol(symbolValue, symbolValue);
   			}
   			
   			else {
   				symbol = new Symbol(symbolValue, "identifier");
-  			}
-  			
+  			} 			
   		}
     	
     	else if (patternStrategy.hasNum()) {
@@ -64,7 +64,7 @@ public class TRIVLexerStrategy implements LexerStrategy
   }
   
   
-  public void initialise(String s)
+  public void initialise(String s) throws IllegalCharacterException
   {
   	
   	source = s;
@@ -73,8 +73,8 @@ public class TRIVLexerStrategy implements LexerStrategy
   	
   }
   
-  
-  public Boolean have(String s)
+  @Override
+  public Boolean have(String s) throws IllegalCharacterException
   {
   	
   	if (currentSymbol != null && s.equals(currentSymbol.getType())) {
@@ -90,6 +90,7 @@ public class TRIVLexerStrategy implements LexerStrategy
   
   
   public void mustBe(String s)
+  		throws SymbolNotFoundException, IllegalCharacterException
   {
   	
   	if (currentSymbol == null) {
@@ -99,7 +100,9 @@ public class TRIVLexerStrategy implements LexerStrategy
   		nextSymbol();
   	}
   	else {
-  		error("error: [" + currentSymbol.getValue() + "]" + " found where [" + s + "] expected.");
+  		throw new SymbolNotFoundException("error: " + currentSymbol.getType() +
+  				                              " [" + currentSymbol.getValue() +
+  				                              "]" + " found where [" + s + "] expected.");
   	}
   	
   }
@@ -154,16 +157,16 @@ public class TRIVLexerStrategy implements LexerStrategy
 	}
 	
 	
-	public String punctuator(Character c)
+	public String punctuator(Character c) throws IllegalCharacterException
 	{
 
-		switch(c) {		
+		switch(c) {
 	  case '=' : slice(1); return c.toString();
-	  case '+' : return c.toString();
-	  case '*' : return c.toString();
-	  case '/' : return c.toString();
-	  case '-' : return c.toString();
-	  default  : return "lexical error - illegal character: [" + c + "]";
+	  case '+' : slice(1); return c.toString();
+	  case '*' : slice(1); return c.toString();
+	  case '/' : slice(1); return c.toString();
+	  case '-' : slice(1); return c.toString();
+	  default  : throw new IllegalCharacterException("lexical error - illegal character: " + c);
 	  }
 		
 	}
@@ -172,9 +175,7 @@ public class TRIVLexerStrategy implements LexerStrategy
 	
 	protected boolean isBoolean(String symbolValue)
 	{
-		
-		return (symbolValue.equals("true") || symbolValue.equals("false"));
-		
+		return (symbolValue.equals("true") || symbolValue.equals("false"));		
 	}
 	
 	
