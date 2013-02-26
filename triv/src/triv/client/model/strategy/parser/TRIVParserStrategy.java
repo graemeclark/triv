@@ -3,8 +3,6 @@ package triv.client.model.strategy.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.user.client.Window;
-
 import triv.client.model.compiler.*;
 import triv.client.model.runtime.instruction.*;
 import triv.client.model.runtime.types.CodeVectorType;
@@ -33,22 +31,24 @@ public class TRIVParserStrategy implements ParserStrategy
 			throws SymbolNotFoundException, IllegalCharacterException
 	{		
 		Symbol sym = lex.getCurrentSymbol();
-		Window.alert(sym.getType());
 		
 		if (lex.have("let")) {
 			letExpression();
 		}
 		
 		else if (lex.have("identifier")) {
-			if (symbolTable.lookup(sym) != null) {
-				//codeVector.add("stackLoad");
-				//codeVector.add(sym.getValue());
-			}
+			/*if (symbolTable.lookup(sym) != null) {
+				codeVector.add("stackLoad");
+				codeVector.add(sym.getValue());
+			}*/
 		}
 		
 		else if (lex.have("numericLiteral")) {
 			codeVector.add(new CodeVectorType(new LoadInt()));
 			codeVector.add(new CodeVectorType(Integer.parseInt(sym.getValue())));
+			if (lex.have("+")) {
+			  add();
+			}
 		}
 		
 		else if (lex.have("boolLiteral")) {
@@ -70,8 +70,21 @@ public class TRIVParserStrategy implements ParserStrategy
 		symbolTable.put(variable.getValue(), init.getValue());
 
 		lex.mustBe("in");
-
 		expression();
+	}
+	
+	private void add()
+	    throws SymbolNotFoundException, IllegalCharacterException
+	{
+	  Symbol snd = lex.getCurrentSymbol();
+	  
+	  lex.mustBe("numericLiteral");
+	  codeVector.add(new CodeVectorType(new LoadInt()));
+	  codeVector.add(new CodeVectorType(Integer.parseInt(snd.getValue())));
+	  codeVector.add(new CodeVectorType(new AddOp()));
+	  
+	  lex.mustBe("in");
+	  expression();
 	}
 
 }

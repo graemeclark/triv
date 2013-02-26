@@ -9,7 +9,7 @@ public class TRIVPatternStrategy implements PatternStrategy
 {
 	
 	protected static RegExp identifier = RegExp.compile("[a-zA-Z][a-zA-Z0-9]*");
-	protected static RegExp numeric    = RegExp.compile("\\d");
+	protected static RegExp numeric    = RegExp.compile("\\d+");
 	protected static RegExp dQuote     = RegExp.compile("\"");
 	protected static RegExp newline    = RegExp.compile("\n");
 	
@@ -21,7 +21,7 @@ public class TRIVPatternStrategy implements PatternStrategy
 	public void setMatchers(String source)
 	{
   	
-  	s = source;
+  	  s = source;
 		
 	}
 

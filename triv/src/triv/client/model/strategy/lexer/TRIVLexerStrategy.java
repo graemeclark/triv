@@ -220,7 +220,7 @@ public class TRIVLexerStrategy implements LexerStrategy
 		
 	}
   
-  
+
   
   public Integer integer()
 	{
