@@ -2,22 +2,36 @@
 
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
         xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+        
+  <ui:style> 
+    .centerStyle
+    {
+      width: 800px; 
+      margin: 0 auto 0 auto; 
+    }
+    
+    .compile
+    {
+      
+    }
+  </ui:style> 
 
-  <g:VerticalPanel horizontalAlignment="ALIGN_CENTER">
-    <g:Cell horizontalAlignment="ALIGN_CENTER">
-  	    <g:Label text="TRIV"/>
+  <g:VerticalPanel styleName='{style.centerStyle}'>
+
+  	<g:Cell horizontalAlignment="ALIGN_CENTER">
+  		<g:TextArea ui:field="code" width="500px" height="200px"/>
+  	</g:Cell>
+  	
+  	<g:Cell horizontalAlignment="ALIGN_LEFT">
+  		<g:Button ui:field="btnCompile" styleName='{style.compile}' text="Compile"/>
+  	</g:Cell>
+  	
+  	<g:Cell horizontalAlignment="ALIGN_RIGHT">
+  		<g:Button ui:field="btnExecute" styleName='{style.compile}' text="Execute"/>
   	</g:Cell>
   	
   	<g:Cell horizontalAlignment="ALIGN_CENTER">
-  		<g:TextArea ui:field="code" width="360px" height="175px"/>
-  	</g:Cell>
-  	
-  	<g:Cell horizontalAlignment="ALIGN_CENTER">
-  		<g:Button ui:field="btnCompile" text="Compile"/>
-  	</g:Cell>
-  	
-  	<g:Cell horizontalAlignment="ALIGN_CENTER">
-  		<g:Label ui:field="error" width="360px"/>
+  		<g:Label ui:field="error" width="500px"/>
   	</g:Cell>
   	
   </g:VerticalPanel>

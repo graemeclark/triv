@@ -6,7 +6,7 @@ import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.List;
 
-import triv.client.IOService;
+import triv.client.rpc.IOService;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;

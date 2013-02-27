@@ -1,6 +1,6 @@
 package triv.client.view;
 
-import triv.client.presenter.InputGinjector;
+import triv.client.injector.InputGinjector;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

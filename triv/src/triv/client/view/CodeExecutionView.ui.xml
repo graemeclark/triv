@@ -9,25 +9,16 @@
       width: 800px; 
       margin: 0 auto 0 auto; 
     }
-    
-    .compile
-    {
-      
-    }
   </ui:style> 
 
   <g:VerticalPanel styleName='{style.centerStyle}'>
+   
+    <g:Cell horizontalAlignment="ALIGN_CENTER">
+  	  <g:Label ui:field="state" width="500px"/>
+    </g:Cell>
 
   	<g:Cell horizontalAlignment="ALIGN_CENTER">
-  		<g:TextArea ui:field="code" width="500px" height="200px"/>
-  	</g:Cell>
-  	
-  	<g:Cell horizontalAlignment="ALIGN_LEFT">
-  		<g:Button ui:field="btnCompile" styleName='{style.compile}' text="Compile"/>
-  	</g:Cell>
-  	
-  	<g:Cell horizontalAlignment="ALIGN_RIGHT">
-  		<g:Button ui:field="btnExecute" styleName='{style.compile}' text="Execute"/>
+  		<g:Button ui:field="btnStep" text="Execute"/>
   	</g:Cell>
   	
   	<g:Cell horizontalAlignment="ALIGN_CENTER">

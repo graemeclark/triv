@@ -13,12 +13,13 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
-import triv.client.IOService;
-import triv.client.IOServiceAsync;
+import triv.client.rpc.IOServiceAsync;
 import triv.client.model.compiler.Compiler;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.model.runtime.types.CodeVectorType;
+import triv.client.rpc.IOService;
+import triv.client.uihandler.InputUiHandlers;
 
 public class InputPresenter extends
 	Presenter<InputPresenter.InputView, InputPresenter.InputProxy>
@@ -28,7 +29,7 @@ public class InputPresenter extends
 	public interface InputView extends View, HasUiHandlers<InputUiHandlers> {}
 	
 	@ProxyCodeSplit
-  @NameToken("main")
+  @NameToken("in")
   public interface InputProxy extends ProxyPlace<InputPresenter> {}
 	
 	IOServiceAsync ioService = (IOServiceAsync) GWT.create(IOService.class);
@@ -57,7 +58,8 @@ public class InputPresenter extends
 	@Override
 	public void setParser(String name)
 	{
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

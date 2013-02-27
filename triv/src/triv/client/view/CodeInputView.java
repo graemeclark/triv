@@ -12,12 +12,12 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-import triv.client.IOService;
-import triv.client.IOServiceAsync;
+import triv.client.rpc.IOServiceAsync;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.presenter.InputPresenter;
-import triv.client.presenter.InputUiHandlers;
+import triv.client.rpc.IOService;
+import triv.client.uihandler.InputUiHandlers;
 
 public class CodeInputView extends ViewWithUiHandlers<InputUiHandlers> implements InputPresenter.InputView
 {
@@ -48,6 +48,9 @@ public class CodeInputView extends ViewWithUiHandlers<InputUiHandlers> implement
   
   @UiField
   Button btnCompile;
+  
+  @UiField
+  Button btnExecute;
   
   @UiField
   Label error;

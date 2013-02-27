@@ -19,6 +19,8 @@
 
 	<!-- Other module inherits                                      -->
 	<inherits name='com.gwtplatform.mvp.Mvp' />
+	<inherits name="com.google.gwt.uibinder.UiBinder" />
+    <inherits name="com.google.gwt.inject.Inject" />
 
 	<!-- Specify the app entry point class.                         -->
     <entry-point class='triv.client.view.ProgramEntry' />
@@ -29,6 +31,6 @@
 
     <define-configuration-property name="gin.ginjector" is-multi-valued="false" />
     <set-configuration-property name="gin.ginjector"
-       value="triv.client.presenter.InputGinjector" />
+       value="triv.client.injector.InputGinjector" />
 
 </module>
