@@ -2,11 +2,11 @@ package triv.client.presenter;
 
 import java.util.List;
 
+import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
@@ -15,6 +15,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+import triv.client.editor.EditView;
 import triv.client.event.ExecuteEvent;
 import triv.client.model.runtime.machine.TRIVMachine;
 import triv.client.model.runtime.types.CodeVectorType;
@@ -26,14 +27,15 @@ public class ExecutionPresenter extends
   	implements ExecutionUiHandlers
 {
 	
-	public interface ExecutionView extends View, HasUiHandlers<ExecutionUiHandlers> {}
+	public interface ExecutionView extends EditView<Machine>, HasUiHandlers<ExecutionUiHandlers> {}
 	
 	@ProxyCodeSplit
 	@NameToken("exe")
   public interface ExecutionProxy extends ProxyPlace<ExecutionPresenter> {}
 	
 	PlaceManager placeManager;
-	Machine machine = new TRIVMachine();
+	SimpleBeanEditorDriver<Machine, ?> editorDriver;
+	Machine machine;
 	List<CodeVectorType> codeVector;
 		
 	@Inject
@@ -43,6 +45,7 @@ public class ExecutionPresenter extends
 		this.placeManager = places;
 		getView().setUiHandlers(this);
 		prepareFromRequest(null);
+		editorDriver = this.getView().createEditorDriver();
 	}
 
 	@Override
@@ -56,24 +59,21 @@ public class ExecutionPresenter extends
 	public void onExecuteEvent(ExecuteEvent event) {
 	  PlaceRequest request = new PlaceRequest("exe");
 	  placeManager.revealPlace(request);
+	  
 	  codeVector = event.getCodeVector();
-	}
-	
-	@Override
-	public List<CodeVectorType> getCodeVector()
-	{
-		return codeVector;
-	}
-	
-	public void init(List<CodeVectorType> codeVector)
-	{
+		machine = new TRIVMachine();
 		machine.setCodeVector(codeVector);
 	}
 	
-	public String step()
+	public void init()
+	{
+		editorDriver.edit(machine);
+	}
+	
+	public void step()
 	{
 		machine.execute();
-		return machine.toString();
+		editorDriver.edit(machine);
 	}
 	
 }

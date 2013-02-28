@@ -10,4 +10,11 @@ public interface Machine
 	public void push(HeapType s);
 	public HeapType pop();
 	public CodeVectorType getParameter();
+	
+	public String getStack();
+	public String getHeap();
+	public String getStackPointer();
+	public String getHeapPointer();
+	public String getCodePointer();
+	public String getCode();
 }

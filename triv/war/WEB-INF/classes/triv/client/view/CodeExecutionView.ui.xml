@@ -3,7 +3,15 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
         xmlns:g='urn:import:com.google.gwt.user.client.ui'>
         
-  <ui:style> 
+  <ui:style>
+    .h2
+    {
+	  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	  font-size: 20pt;
+	  color: navy;
+	  padding-top: 12px;
+	  padding-bottom: 3px;
+	}
     .centerStyle
     {
       width: 800px; 
@@ -12,15 +20,48 @@
   </ui:style> 
 
   <g:VerticalPanel styleName='{style.centerStyle}'>
-   
-    <g:Cell horizontalAlignment="ALIGN_CENTER">
-  	  <g:Label ui:field="state" width="500px"/>
-    </g:Cell>
-
-  	<g:Cell horizontalAlignment="ALIGN_CENTER">
-  		<g:Button ui:field="btnStep" text="Execute"/>
+  
+    <g:Cell>
+  	  <g:Button ui:field="btnStep" text="Execute"/>
   	</g:Cell>
+  	  
+    <g:HorizontalPanel styleName='{style.centerStyle}'>
+    
+  	  <g:Cell>
+  	    <g:Label ui:field="code" width="500px"/>
+      </g:Cell>
+      
+      <g:Cell>
+  	    <g:Label ui:field="codePointer" width="500px"/>
+      </g:Cell>
+    
+    </g:HorizontalPanel> 
   	
+  	  	
+  	<g:HorizontalPanel styleName='{style.centerStyle}'>
+  	
+      <g:Cell>
+  	    <g:Label ui:field="stack" width="500px"/>
+      </g:Cell>
+    
+      <g:Cell>
+  	    <g:Label ui:field="stackPointer" width="500px"/>
+      </g:Cell>
+    
+    </g:HorizontalPanel>
+    
+    <g:HorizontalPanel styleName='{style.centerStyle}'>
+  	
+      <g:Cell>
+  	    <g:Label ui:field="heap" width="500px"/>
+      </g:Cell>
+    
+      <g:Cell>
+  	    <g:Label ui:field="heapPointer" width="500px"/>
+      </g:Cell>
+    
+    </g:HorizontalPanel>
+      	
   	<g:Cell horizontalAlignment="ALIGN_CENTER">
   		<g:Label ui:field="error" width="500px"/>
   	</g:Cell>

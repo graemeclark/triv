@@ -51,6 +51,11 @@ public class TRIVParserStrategy implements ParserStrategy
 			}
 		}
 		
+		/*else if (lex.have("stringLiteral")) {
+			codeVector.add(new CodeVectorType(new LoadString()));
+			codeVector.add(new CodeVectorType(sym.getValue()));
+		}*/
+		
 		else if (lex.have("boolLiteral")) {
 			codeVector.add(new CodeVectorType(new LoadBool()));
 			codeVector.add(new CodeVectorType(Boolean.parseBoolean(sym.getValue())));
