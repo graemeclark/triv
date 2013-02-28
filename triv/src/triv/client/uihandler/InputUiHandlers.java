@@ -18,4 +18,5 @@ public interface InputUiHandlers extends UiHandlers
 	void setParser(String name);
 	void setLexer(String name);
 	void setPattern(String name);
+	void execute();
 }

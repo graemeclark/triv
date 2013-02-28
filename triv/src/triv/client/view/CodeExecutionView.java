@@ -1,7 +1,11 @@
 package triv.client.view;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.google.inject.Inject;
@@ -21,6 +25,26 @@ public class CodeExecutionView extends ViewWithUiHandlers<ExecutionUiHandlers> i
 	{
 		super();
 	}
+	
+	@UiField
+	Label state;
+	
+	@UiField
+	Label btnStep;
+	
+	@UiHandler("state")
+  void onStateLabelAttach(AttachEvent event) {
+		if (getUiHandlers() != null) {
+			state.setText(getUiHandlers().getCodeVector().toString());
+    }
+  }
+	
+	@UiHandler("btnStep")
+  void onExecuteButtonClick(AttachEvent event) {
+		if (getUiHandlers() != null) {
+			state.setText(getUiHandlers().getCodeVector().toString());
+    }
+  }
 	
 	@Override
 	public Widget asWidget()

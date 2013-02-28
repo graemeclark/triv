@@ -56,6 +56,11 @@ public class TRIVMachine implements Machine
   {
     
     codeVector = cv;
+    for (CodeVectorType c : codeVector) {
+    	if(c.isInstruction()) {
+    		c.getIns().setMachine(this);
+    	}
+    }
     
   }
   

@@ -2,7 +2,6 @@ package triv.client.presenter;
 
 import java.util.List;
 
-import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -13,12 +12,11 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
-import triv.client.rpc.IOServiceAsync;
+import triv.client.event.ExecuteEvent;
 import triv.client.model.compiler.Compiler;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.model.runtime.types.CodeVectorType;
-import triv.client.rpc.IOService;
 import triv.client.uihandler.InputUiHandlers;
 
 public class InputPresenter extends
@@ -32,8 +30,8 @@ public class InputPresenter extends
   @NameToken("in")
   public interface InputProxy extends ProxyPlace<InputPresenter> {}
 	
-	IOServiceAsync ioService = (IOServiceAsync) GWT.create(IOService.class);
 	Compiler compiler = new Compiler();
+	List<CodeVectorType> codeVector;
 	
 	@Inject
 	public InputPresenter(EventBus eventBus, InputView view, InputProxy proxy)
@@ -52,7 +50,14 @@ public class InputPresenter extends
 	public List<CodeVectorType> compile(String source)
 			throws SymbolNotFoundException, IllegalCharacterException
 	{
-		return compiler.compile(source);
+		codeVector = compiler.compile(source);
+		return codeVector;
+	}
+	
+	@Override
+	public void execute()
+	{
+		ExecuteEvent.fire(this, codeVector);
 	}
 
 	@Override

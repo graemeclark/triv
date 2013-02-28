@@ -59,9 +59,6 @@ public class CodeInputView extends ViewWithUiHandlers<InputUiHandlers> implement
 	public CodeInputView()
 	{
 		super();
-		/*getComponents(PARSER);
-		getComponents(LEXER);
-		getComponents(PATTERN);*/
 	}
 	
 	@Override
@@ -75,7 +72,6 @@ public class CodeInputView extends ViewWithUiHandlers<InputUiHandlers> implement
 		if (getUiHandlers() != null) {
 			try {
 				error.setText(getUiHandlers().compile(code.getText()).toString());
-				//error.setText("Compilation successful");
 			}
 			catch (SymbolNotFoundException e) {
 				error.setText(e.getMessage());
@@ -83,6 +79,13 @@ public class CodeInputView extends ViewWithUiHandlers<InputUiHandlers> implement
 			catch (IllegalCharacterException e) {
 				error.setText(e.getMessage());
 			}
+    }
+  }
+	
+	@UiHandler("btnExecute")
+  void onExecuteButtonClick(ClickEvent event) {
+		if (getUiHandlers() != null) {
+			getUiHandlers().execute();
     }
   }
 	

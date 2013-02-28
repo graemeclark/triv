@@ -25,5 +25,10 @@ public class TRIVPlaceManager extends PlaceManagerImpl
   public void revealDefaultPlace()
   {
     revealPlace(defaultPlaceRequest);
-  }  
+  }
+  
+  public void reveal(PlaceRequest req)
+  {
+  	revealPlace(req);
+  }
 }

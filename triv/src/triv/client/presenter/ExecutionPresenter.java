@@ -9,9 +9,13 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+import triv.client.event.ExecuteEvent;
 import triv.client.model.runtime.machine.TRIVMachine;
 import triv.client.model.runtime.types.CodeVectorType;
 import triv.client.model.runtime.types.Machine;
@@ -28,13 +32,17 @@ public class ExecutionPresenter extends
 	@NameToken("exe")
   public interface ExecutionProxy extends ProxyPlace<ExecutionPresenter> {}
 	
+	PlaceManager placeManager;
 	Machine machine = new TRIVMachine();
+	List<CodeVectorType> codeVector;
 		
 	@Inject
-	public ExecutionPresenter(EventBus eventBus, ExecutionView view, ExecutionProxy proxy)
+	public ExecutionPresenter(EventBus eventBus, ExecutionView view, ExecutionProxy proxy, PlaceManager places)
 	{
 		super(eventBus, view, proxy);
+		this.placeManager = places;
 		getView().setUiHandlers(this);
+		prepareFromRequest(null);
 	}
 
 	@Override
@@ -43,9 +51,27 @@ public class ExecutionPresenter extends
 		RevealRootContentEvent.fire( this, this );
 	}
 	
-	public String step(List<CodeVectorType> codeVector)
+	@ProxyEvent
+	@Override
+	public void onExecuteEvent(ExecuteEvent event) {
+	  PlaceRequest request = new PlaceRequest("exe");
+	  placeManager.revealPlace(request);
+	  codeVector = event.getCodeVector();
+	}
+	
+	@Override
+	public List<CodeVectorType> getCodeVector()
+	{
+		return codeVector;
+	}
+	
+	public void init(List<CodeVectorType> codeVector)
 	{
 		machine.setCodeVector(codeVector);
+	}
+	
+	public String step()
+	{
 		machine.execute();
 		return machine.toString();
 	}
