@@ -2,6 +2,7 @@ package triv.client.model.strategy.interfaces;
 
 import java.util.List;
 
+import triv.client.model.compiler.IdentifierNotDeclaredException;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.model.runtime.types.CodeVectorType;
@@ -11,9 +12,9 @@ public interface ParserStrategy
 {
 	
 	public List<CodeVectorType> parse(LexerStrategy l, String source)
-			throws SymbolNotFoundException, IllegalCharacterException;
+			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException;
 	
 	public String expression()
-			throws SymbolNotFoundException, IllegalCharacterException;
+			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException;
 
 }

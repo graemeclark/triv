@@ -14,10 +14,10 @@ public class TRIVParserStrategy implements ParserStrategy
 	protected SymbolTable symbolTable;
 	protected List<CodeVectorType> codeVector;
 	protected String lastExpType;
-	protected Integer codeIndex;
+	protected Integer codeIndex, codeAddr;
 
 	public List<CodeVectorType> parse(LexerStrategy l, String source)
-			throws SymbolNotFoundException, IllegalCharacterException
+			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException
 	{
 		symbolTable = new SymbolTable();
 		codeVector = new ArrayList<CodeVectorType>();
@@ -32,7 +32,7 @@ public class TRIVParserStrategy implements ParserStrategy
 	}
 
 	public String expression()
-			throws SymbolNotFoundException, IllegalCharacterException
+			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException
 	{		
 		Symbol sym = lex.getCurrentSymbol();
 		
@@ -45,21 +45,18 @@ public class TRIVParserStrategy implements ParserStrategy
 		}
 		
 		else if (lex.have("identifier")) {
-			/*if (symbolTable.lookup(sym) != null) {
-				codeVector.add("stackLoad");
-				codeVector.add(sym.getValue());
-			}*/
+			Integer addr = symbolTable.lookup(sym);
+			if (addr != null) {
+				addIns(new CodeVectorType(new StackLoad()));
+				addIns(new CodeVectorType(addr));
+			}
 		}
 		
 		else if (lex.have("numericLiteral")) {
 			lastExpType = "int";
 			addIns(new CodeVectorType(new LoadInt()));
 			addIns(new CodeVectorType(Integer.parseInt(sym.getValue())));
-		}		
-		/*else if (lex.have("stringLiteral")) {
-			codeVector.add(new CodeVectorType(new LoadString()));
-			codeVector.add(new CodeVectorType(sym.getValue()));
-		}*/
+		}
 		
 		else if (lex.have("boolLiteral")) {
 			lastExpType = "bool";
@@ -87,26 +84,27 @@ public class TRIVParserStrategy implements ParserStrategy
 	private void addIns(CodeVectorType c)
 	{
 		codeVector.add(codeIndex, c);
+		if (c.isInstruction()) {
+		  codeAddr = codeIndex;
+		}
 		codeIndex++;
 	}
 	
 	private void letExpression()
-			throws SymbolNotFoundException, IllegalCharacterException
+			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException
 	{
 		Symbol variable = lex.getCurrentSymbol();		
 		lex.mustBe("identifier");
 		lex.mustBe("=");
 		expression();
-		
-		Symbol init = lex.getCurrentSymbol();
-		symbolTable.put(variable.getValue(), init.getValue());
-
+		symbolTable.put(variable.getValue(), codeAddr);
 		lex.mustBe("in");
 		expression();
+		addIns(new CodeVectorType(new Retract()));
 	}
 	
 	private void ifExpression()
-			throws SymbolNotFoundException, IllegalCharacterException
+			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException
 	{
 		lex.mustBe("(");
 		expression();

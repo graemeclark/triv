@@ -17,13 +17,15 @@
   		<g:TextArea ui:field="code" width="500px" height="200px"/>
   	</g:Cell>
   	
-  	<g:Cell horizontalAlignment="ALIGN_LEFT">
+  <g:HorizontalPanel styleName='{style.centerStyle}'>
+  	<g:Cell horizontalAlignment="ALIGN_CENTER">
   		<g:Button ui:field="btnCompile" text="Compile"/>
   	</g:Cell>
   	
-  	<g:Cell horizontalAlignment="ALIGN_RIGHT">
+  	<g:Cell horizontalAlignment="ALIGN_CENTER">
   		<g:Button ui:field="btnExecute" text="Execute"/>
   	</g:Cell>
+  </g:HorizontalPanel>
   	
   	<g:Cell horizontalAlignment="ALIGN_CENTER">
   		<g:Label ui:field="error" width="500px"/>

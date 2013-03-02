@@ -13,6 +13,7 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import triv.client.rpc.IOServiceAsync;
+import triv.client.model.compiler.IdentifierNotDeclaredException;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.presenter.InputPresenter;
@@ -77,6 +78,9 @@ public class CodeInputView extends ViewWithUiHandlers<InputUiHandlers> implement
 				error.setText(e.getMessage());
 			}
 			catch (IllegalCharacterException e) {
+				error.setText(e.getMessage());
+			}
+			catch (IdentifierNotDeclaredException e) {
 				error.setText(e.getMessage());
 			}
     }

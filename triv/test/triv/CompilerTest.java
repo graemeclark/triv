@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import triv.client.model.compiler.Compiler;
+import triv.client.model.compiler.IdentifierNotDeclaredException;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.model.runtime.instruction.LoadInt;
@@ -38,6 +39,9 @@ public class CompilerTest
     catch (IllegalCharacterException e) {
     	System.out.println(e.getMessage());
     }
+    catch (IdentifierNotDeclaredException e) {
+    	System.out.println(e.getMessage());
+		}
 		List<CodeVectorType> expected = new ArrayList<CodeVectorType>();
 		
 		expected.add(new CodeVectorType (new LoadInt()));

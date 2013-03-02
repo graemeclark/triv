@@ -43,7 +43,7 @@ public class Compiler
 	}
 	
 	public List<CodeVectorType> compile(String source)
-			throws SymbolNotFoundException, IllegalCharacterException
+			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException
 	{
 		
 		return parser.parse(lex, source);

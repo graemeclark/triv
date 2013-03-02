@@ -11,6 +11,10 @@ public interface Machine
 	public HeapType pop();
 	public CodeVectorType getParameter();
 	public void jump(int index);
+	public Integer getCurrentCodePointer();
+	void setCodePointer(int change);
+	public List<CodeVectorType> getCodeVector();
+	void addToCodePointer(int cp);
 	
 	public String getStack();
 	public String getHeap();
@@ -18,5 +22,4 @@ public interface Machine
 	public String getHeapPointer();
 	public String getCodePointer();
 	public String getCode();
-	void setCodePointer(int change);
 }

@@ -14,7 +14,7 @@ public class JumpIfFalse implements Instruction
 			machine.jump(machine.getParameter().getInt());
 		}
 		else {
-			machine.setCodePointer(1);
+			machine.addToCodePointer(1);
 		}
 	}
 

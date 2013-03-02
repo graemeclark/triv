@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import triv.client.model.compiler.Compiler;
+import triv.client.model.compiler.IdentifierNotDeclaredException;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.model.runtime.machine.TRIVMachine;
@@ -40,6 +41,9 @@ public class ExecutionTest
     catch (IllegalCharacterException e) {
       e.printStackTrace();
     }
+    catch (IdentifierNotDeclaredException e) {
+    	System.out.println(e.getMessage());
+		}
     
     m.setCodeVector(cv);
     m.execute();
@@ -51,7 +55,7 @@ public class ExecutionTest
     m.execute();
     System.out.println(m);
     
-		//fail("Not yet implemented");
+		fail("Not yet implemented");
 	}
 
 }

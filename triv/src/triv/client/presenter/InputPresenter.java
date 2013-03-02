@@ -14,6 +14,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 import triv.client.event.ExecuteEvent;
 import triv.client.model.compiler.Compiler;
+import triv.client.model.compiler.IdentifierNotDeclaredException;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.model.runtime.types.CodeVectorType;
@@ -48,7 +49,7 @@ public class InputPresenter extends
 	
 	@Override
 	public List<CodeVectorType> compile(String source)
-			throws SymbolNotFoundException, IllegalCharacterException
+			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException
 	{
 		codeVector = compiler.compile(source);
 		return codeVector;

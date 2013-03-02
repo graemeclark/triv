@@ -50,9 +50,15 @@ public class TRIVMachine implements Machine
   }
   
   @Override
-  public void setCodePointer(int change)
+  public void addToCodePointer(int change)
   {
   	codePointer = codePointer + change;
+  }
+  
+  @Override
+  public void setCodePointer(int cp)
+  {
+  	codePointer = cp;
   }
   
   @Override
@@ -130,5 +136,18 @@ public class TRIVMachine implements Machine
 	{
 		return codeVector.toString();
 	}
+
+	@Override
+	public List<CodeVectorType> getCodeVector()
+	{
+		return codeVector;
+	}
+	
+	@Override
+	public Integer getCurrentCodePointer()
+	{
+		return codePointer;
+	}
+
 	
 }

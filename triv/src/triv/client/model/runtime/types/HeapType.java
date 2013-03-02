@@ -7,52 +7,43 @@ public class HeapType
   Boolean b;
 	
   public HeapType(int n)
-  {
-  	
-    i = n;
-    
+  {  	
+    i = n;   
   }
 	
   public HeapType(boolean bool)
-  {
-  	
-    b = bool;
-    
+  {  	
+    b = bool;    
   }
 	
   public String toString()
-  {
-  	
-    if (i != null)
+  {  	
+    if (i != null) {
       return i + "";
-    
-    else 
-	  return b + "";
-    
+    }    
+    else { 
+	    return b + "";
+    }
   }
   
   public Object getVal()
-  {
-  	
-  	if (i != null)
+  { 	
+  	if (i != null) {
   		return i;
-  	
-    else 
+  	}  	
+    else { 
 	    return b;
+    }
   }
 	
   public int getInt()
-  {
-  	
-	  return i;
-	
+  {  	
+	  return i;	
   }
 	
   public boolean getBool()
-  {
-  	
-	  return b;
-	
+  { 	
+	  return b;	
   }
 
 }
