@@ -38,15 +38,24 @@ public class TRIVMachine implements Machine
            "HP:          " + heapPointer  + "\n" ;
   }
 	
+  @Override
   public void execute()
   {
   	if (codePointer < codeVector.size()) {
-	    codeVector.get(codePointer).getIns().executeInstruction();
-	    codePointer++;
+  		if (codeVector.get(codePointer).isInstruction()) {
+	      codeVector.get(codePointer).getIns().executeInstruction();
+	      codePointer++;
+  		}
   	}
-  	System.out.println(this);
   }
   
+  @Override
+  public void setCodePointer(int change)
+  {
+  	codePointer = codePointer + change;
+  }
+  
+  @Override
   public void setCodeVector(List<CodeVectorType> cv)
   {   
     codeVector = cv;
@@ -57,6 +66,7 @@ public class TRIVMachine implements Machine
     }    
   }
   
+  @Override
   public void push(HeapType s)
   {	
   	heap.add(s);
@@ -65,17 +75,25 @@ public class TRIVMachine implements Machine
 	  stackPointer = stack.indexOf(heapPointer);
   }
   
+  @Override
   public HeapType pop()
   {   
   	heapPointer = stack.pop();
-	  return heap.get(heapPointer);	  
+	  return heap.get(heapPointer);
   }
   
+  @Override
   public CodeVectorType getParameter()
-  {    
-	  codePointer++;  
-	  return codeVector.get(codePointer);	  
+  {
+	  codePointer++;
+	  return codeVector.get(codePointer);
   }
+  
+	@Override
+	public void jump(int index)
+	{
+		codePointer = index - 1;
+	}
   
   @Override
   public String getStack()
@@ -111,5 +129,6 @@ public class TRIVMachine implements Machine
 	public String getCode()
 	{
 		return codeVector.toString();
-	}	
+	}
+	
 }

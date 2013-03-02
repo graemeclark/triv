@@ -29,4 +29,6 @@ public interface PatternStrategy
 	
 	public String matchingNum();
 
+	Boolean hasEquality();
+
 }

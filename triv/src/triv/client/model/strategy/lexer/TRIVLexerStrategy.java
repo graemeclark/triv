@@ -7,7 +7,7 @@ import triv.client.model.strategy.interfaces.*;
 
 public class TRIVLexerStrategy implements LexerStrategy
 {
-	private static String[] reservedWords = { "let", "in" };
+	private static String[] reservedWords = { "let", "in", "if", "then", "else" };
 	
 	protected PatternStrategy patternStrategy;
 	protected String          source;
@@ -46,6 +46,11 @@ public class TRIVLexerStrategy implements LexerStrategy
     	
     	else if (patternStrategy.hasDQuote()) {
   			symbol = new Symbol(dQuote(), "stringLiteral");
+  		}
+    	
+    	else if (patternStrategy.hasEquality()) {
+  			symbol = new Symbol("==", "==");
+  			slice(2);
   		}
   		
   		else {
@@ -166,6 +171,8 @@ public class TRIVLexerStrategy implements LexerStrategy
 	  case '*' : slice(1); return c.toString();
 	  case '/' : slice(1); return c.toString();
 	  case '-' : slice(1); return c.toString();
+	  case '(' : slice(1); return c.toString();
+	  case ')' : slice(1); return c.toString();
 	  default  : throw new IllegalCharacterException("lexical error - illegal character: " + c);
 	  }
 		

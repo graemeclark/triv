@@ -29,13 +29,14 @@ public class CompilerTest
 	  c.setPatternStrategy(new TRIVPatternStrategy());
 
     try {
-      cv = c.compile("3 + 2 in let y = 45");
+      //cv = c.compile("if (1 + 1 == 2) then 0 else 1");
+      cv = c.compile("if (3 == 1 + 2) then 0 else 1");
     }
     catch (SymbolNotFoundException e) {
-      e.printStackTrace();
+      System.out.println(e.getMessage());
     }
     catch (IllegalCharacterException e) {
-      e.printStackTrace();
+    	System.out.println(e.getMessage());
     }
 		List<CodeVectorType> expected = new ArrayList<CodeVectorType>();
 		
@@ -45,7 +46,7 @@ public class CompilerTest
 		expected.add(new CodeVectorType (2));
 		
 		System.out.println(cv);
-		System.out.println(expected);
+		//System.out.println(expected);
 		
 		assertEquals(cv, expected);
 		
