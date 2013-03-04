@@ -6,6 +6,7 @@ import triv.client.model.compiler.IdentifierNotDeclaredException;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.model.runtime.types.CodeVectorType;
+import triv.client.presenter.NoSourceCodeException;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 
@@ -15,7 +16,7 @@ public interface InputUiHandlers extends UiHandlers
 	//void getComponents(String component);
 	//List<String> handleComponents(String component);
 	List<CodeVectorType> compile(String source)
-			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException;
+			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException, NoSourceCodeException;
 	void setParser(String name);
 	void setLexer(String name);
 	void setPattern(String name);

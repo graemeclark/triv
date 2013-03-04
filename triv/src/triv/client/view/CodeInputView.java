@@ -2,6 +2,7 @@ package triv.client.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -17,6 +18,7 @@ import triv.client.model.compiler.IdentifierNotDeclaredException;
 import triv.client.model.compiler.IllegalCharacterException;
 import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.presenter.InputPresenter;
+import triv.client.presenter.NoSourceCodeException;
 import triv.client.rpc.IOService;
 import triv.client.uihandler.InputUiHandlers;
 
@@ -68,26 +70,42 @@ public class CodeInputView extends ViewWithUiHandlers<InputUiHandlers> implement
 		return binder.createAndBindUi( this ) ;
 	}
 	
+	@UiHandler("btnExecute")
+  void onExecuteButtonLoad(AttachEvent event)
+	{
+		btnExecute.setEnabled(false);
+  }
+	
 	@UiHandler("btnCompile")
-  void onCompileButtonClick(ClickEvent event) {
+  void onCompileButtonClick(ClickEvent event)
+	{
 		if (getUiHandlers() != null) {
 			try {
 				error.setText(getUiHandlers().compile(code.getText()).toString());
+				btnExecute.setEnabled(true);
 			}
 			catch (SymbolNotFoundException e) {
+				btnExecute.setEnabled(false);
 				error.setText(e.getMessage());
 			}
 			catch (IllegalCharacterException e) {
+				btnExecute.setEnabled(false);
 				error.setText(e.getMessage());
 			}
 			catch (IdentifierNotDeclaredException e) {
+				btnExecute.setEnabled(false);
+				error.setText(e.getMessage());
+			}
+			catch (NoSourceCodeException e) {
+				btnExecute.setEnabled(false);
 				error.setText(e.getMessage());
 			}
     }
   }
 	
 	@UiHandler("btnExecute")
-  void onExecuteButtonClick(ClickEvent event) {
+  void onExecuteButtonClick(ClickEvent event)
+	{
 		if (getUiHandlers() != null) {
 			getUiHandlers().execute();
     }

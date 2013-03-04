@@ -48,6 +48,9 @@ public class CodeExecutionView
 	@UiField
 	Label heapPointer;
 	
+	@UiField
+	Label result;
+	
 	@Inject
 	public CodeExecutionView()
 	{

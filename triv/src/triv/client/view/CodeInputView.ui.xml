@@ -6,8 +6,8 @@
   <ui:style> 
     .centerStyle
     {
-      width: 800px; 
-      margin: 0 auto 0 auto; 
+      width: 800px;
+      margin: 0 auto 0 auto;
     }
   </ui:style> 
 

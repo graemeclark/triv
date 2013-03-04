@@ -13,6 +13,7 @@ public class TRIVMachine implements Machine
   protected Stack <Integer>         stack;
   protected List  <CodeVectorType>  codeVector;
   protected List  <HeapType>				heap;
+  protected HeapType                result;
 	
   public TRIVMachine()
   {
@@ -24,6 +25,7 @@ public class TRIVMachine implements Machine
     stack       = new Stack <Integer>();
 	  codeVector  = new ArrayList <CodeVectorType>();
 	  heap        = new ArrayList <HeapType>();
+	  result      = new HeapType(0);
 		
   }
   
@@ -99,6 +101,18 @@ public class TRIVMachine implements Machine
 	public void jump(int index)
 	{
 		codePointer = index - 1;
+	}
+	
+	@Override
+	public void setResult(HeapType h)
+	{
+		result = h;
+	}
+	
+	@Override
+	public String getResult()
+	{
+		return result.toString();
 	}
   
   @Override

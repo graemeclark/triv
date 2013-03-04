@@ -44,13 +44,17 @@ public class InputPresenter extends
 	@Override
 	protected void revealInParent()
 	{
-		RevealRootContentEvent.fire( this, this );		
+		RevealRootContentEvent.fire( this, this );
 	}
 	
 	@Override
 	public List<CodeVectorType> compile(String source)
-			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException
+			throws SymbolNotFoundException, IllegalCharacterException,
+			       IdentifierNotDeclaredException, NoSourceCodeException
 	{
+		if (source.equals("")) {
+			throw new NoSourceCodeException("No source code input.");
+		}
 		codeVector = compiler.compile(source);
 		return codeVector;
 	}

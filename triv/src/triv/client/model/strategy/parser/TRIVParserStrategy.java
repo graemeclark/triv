@@ -50,6 +50,9 @@ public class TRIVParserStrategy implements ParserStrategy
 				addIns(new CodeVectorType(new StackLoad()));
 				addIns(new CodeVectorType(addr));
 			}
+			else {
+				throw new IdentifierNotDeclaredException(sym.getValue() + " hasn't been declared.");
+			}
 		}
 		
 		else if (lex.have("numericLiteral")) {
@@ -95,6 +98,9 @@ public class TRIVParserStrategy implements ParserStrategy
 	{
 		Symbol variable = lex.getCurrentSymbol();		
 		lex.mustBe("identifier");
+		if (symbolTable.lookup(variable) != null) {
+			throw new IdentifierNotDeclaredException(variable.getValue() + " has already been declared.");
+		}
 		lex.mustBe("=");
 		expression();
 		symbolTable.put(variable.getValue(), codeAddr);

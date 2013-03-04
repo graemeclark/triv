@@ -15,6 +15,7 @@ public interface Machine
 	void setCodePointer(int change);
 	public List<CodeVectorType> getCodeVector();
 	void addToCodePointer(int cp);
+	void setResult(HeapType h);
 	
 	public String getStack();
 	public String getHeap();
@@ -22,4 +23,6 @@ public interface Machine
 	public String getHeapPointer();
 	public String getCodePointer();
 	public String getCode();
+	public String getResult();
+	
 }

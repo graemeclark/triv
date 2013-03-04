@@ -10,7 +10,7 @@ public class Return implements Instruction
 	@Override
 	public void executeInstruction()
 	{
-		//machine.pop();		
+		machine.setResult(machine.pop());		
 	}
 
 	@Override

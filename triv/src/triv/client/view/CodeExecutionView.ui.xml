@@ -4,68 +4,119 @@
         xmlns:g='urn:import:com.google.gwt.user.client.ui'>
         
   <ui:style>
-    .h2
-    {
-	  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-	  font-size: 20pt;
-	  color: navy;
-	  padding-top: 12px;
-	  padding-bottom: 3px;
-	}
     .centerStyle
     {
-      width: 800px; 
-      margin: 0 auto 0 auto; 
+      width: 800px;
+      margin: 0 auto 0 auto;
     }
-  </ui:style> 
-
+    .label
+    {
+	  font-size: 16pt;
+    }
+    .pad
+    {
+	  padding: 0px 0px 100px 0px;
+	}
+	.pointer
+	{
+	  font-size: 16pt;
+	  outline:#000000 solid;
+	}
+  </ui:style>
   <g:VerticalPanel styleName='{style.centerStyle}'>
+    
+  <g:HorizontalPanel styleName='{style.pad}'>
+    <g:Cell horizontalAlignment="ALIGN_CENTER">
+  	  <g:Label ui:field="code" width="1000px" styleName='{style.label}'/>
+    </g:Cell>
+  </g:HorizontalPanel>
   
+  
+  <g:HorizontalPanel>    
+    <g:Cell horizontalAlignment="ALIGN_LEFT">
+  	  <g:Label text="Code Pointer" width="150px"/>
+    </g:Cell> 
+  </g:HorizontalPanel>
+  
+    
+   <g:HorizontalPanel styleName='{style.pad}'> 
+    <g:Cell horizontalAlignment="ALIGN_CENTER">
+  	  <g:Label ui:field="codePointer" width="80px" styleName='{style.pointer}'/>
+    </g:Cell>
+    
     <g:Cell>
-  	  <g:Button ui:field="btnStep" text="Execute"/>
-  	</g:Cell>
-  	  
-    <g:HorizontalPanel styleName='{style.centerStyle}'>
+  	  <g:Label width="25px"/>
+    </g:Cell>
     
-  	  <g:Cell>
-  	    <g:Label ui:field="code" width="500px"/>
-      </g:Cell>
-      
-      <g:Cell>
-  	    <g:Label ui:field="codePointer" width="500px"/>
-      </g:Cell>
+    <g:Cell horizontalAlignment="ALIGN_RIGHT">
+  	  <g:Button ui:field="btnStep" text="Step"/>
+  	</g:Cell>    
+  </g:HorizontalPanel>
+  
+  
+
+  <g:HorizontalPanel>    
+    <g:Cell horizontalAlignment="ALIGN_LEFT">
+  	  <g:Label text="Stack Pointer" width="150px"/>
+    </g:Cell>
     
-    </g:HorizontalPanel> 
-  	
-  	  	
-  	<g:HorizontalPanel styleName='{style.centerStyle}'>
-  	
-      <g:Cell>
-  	    <g:Label ui:field="stack" width="500px"/>
-      </g:Cell>
+      	<g:Cell horizontalAlignment="ALIGN_CENTER">
+  	  <g:Label text="Stack" width="150px"/>
+    </g:Cell>
     
-      <g:Cell>
-  	    <g:Label ui:field="stackPointer" width="500px"/>
-      </g:Cell>
-    
+      	<g:Cell horizontalAlignment="ALIGN_RIGHT">
+  	  <g:Label text="Result" width="150px"/>
+    </g:Cell>
     </g:HorizontalPanel>
     
-    <g:HorizontalPanel styleName='{style.centerStyle}'>
-  	
-      <g:Cell>
-  	    <g:Label ui:field="heap" width="500px"/>
-      </g:Cell>
+
+  
+  <g:HorizontalPanel styleName='{style.pad}'>    
+    <g:Cell horizontalAlignment="ALIGN_CENTER">
+  	  <g:Label ui:field="stackPointer" width="80px" styleName='{style.pointer}'/>
+    </g:Cell>
     
-      <g:Cell>
-  	    <g:Label ui:field="heapPointer" width="500px"/>
-      </g:Cell>
+      	<g:Cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
+  	  <g:Label ui:field="stack" width="500px" styleName='{style.label}'/>
+    </g:Cell>
     
+      	<g:Cell horizontalAlignment="ALIGN_CENTER">
+  	  <g:Label ui:field="result" width="50px" styleName='{style.pointer}'/>
+    </g:Cell>
     </g:HorizontalPanel>
-      	
-  	<g:Cell horizontalAlignment="ALIGN_CENTER">
-  		<g:Label ui:field="error" width="500px"/>
+
+
+    
+    <g:HorizontalPanel>
+      <g:Cell horizontalAlignment="ALIGN_LEFT">
+  	    <g:Label text="Heap Pointer" width="150px"/>
+      </g:Cell>
+    
+      <g:Cell horizontalAlignment="ALIGN_CENTER">
+  	    <g:Label text="Heap" width="150px"/>
+      </g:Cell>
+    </g:HorizontalPanel>
+    
+    
+    
+    <g:HorizontalPanel styleName='{style.pad}'>
+    <g:Cell horizontalAlignment="ALIGN_CENTER">
+  	  <g:Label ui:field="heapPointer" width="80px" styleName='{style.pointer}'/>
+    </g:Cell>
+    
+        <g:Cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
+  	  <g:Label ui:field="heap" width="500px" styleName='{style.label}'/>
+    </g:Cell>
+    </g:HorizontalPanel>
+    
+    
+    
+  <g:HorizontalPanel styleName='{style.centerStyle}'>
+    <g:Cell horizontalAlignment="ALIGN_CENTER">
+      <g:Label ui:field="error" width="500px" styleName='{style.label}'/>
   	</g:Cell>
-  	
+  </g:HorizontalPanel>
+  
   </g:VerticalPanel>
 
 </ui:UiBinder>
