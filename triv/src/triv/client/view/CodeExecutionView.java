@@ -20,68 +20,78 @@ import triv.client.presenter.ExecutionPresenter;
 import triv.client.uihandler.ExecutionUiHandlers;
 
 public class CodeExecutionView
-  extends ViewWithUiHandlers<ExecutionUiHandlers>
-  implements ExecutionPresenter.ExecutionView
+extends ViewWithUiHandlers<ExecutionUiHandlers>
+implements ExecutionPresenter.ExecutionView
 {	
-	interface Binder extends UiBinder<Widget, CodeExecutionView> { }
+  interface Binder extends UiBinder<Widget, CodeExecutionView> { }
   private static final Binder binder = GWT.create(Binder.class);
   public interface EditorDriver extends SimpleBeanEditorDriver<Machine, CodeExecutionView> { }
-	
+
   @UiField
-	Label code;
+  Label code;
+
+  @UiField
+  Label codePointer;
+
+  @UiField
+  Button btnStep;
   
-	@UiField
-	Label codePointer;
-  
-	@UiField
-	Button btnStep;
-	
-	@UiField
-	Label stack;
-	
-	@UiField
-	Label stackPointer;
-	
-	@UiField
-	Label heap;
-	
-	@UiField
-	Label heapPointer;
-	
-	@UiField
-	Label result;
-	
-	@Inject
-	public CodeExecutionView()
-	{
-		super();
-	}
-	
-	@Override
-	public SimpleBeanEditorDriver<Machine, ?> createEditorDriver()
-	{
-	  EditorDriver driver = GWT.create(EditorDriver.class);
-	  driver.initialize(this);
-	  return driver;
-	}
-	
-	@Override
-	public Widget asWidget()
-	{
-		return binder.createAndBindUi(this);
-	}
-	
-	@UiHandler("btnStep")
+  @UiField
+  Button btnReset; 
+
+  @UiField
+  Label stack;
+
+  @UiField
+  Label stackPointer;
+
+  @UiField
+  Label heap;
+
+  @UiField
+  Label heapPointer;
+
+  @UiField
+  Label result;
+
+  @Inject
+  public CodeExecutionView()
+  {
+    super();
+  }
+
+  @Override
+  public SimpleBeanEditorDriver<Machine, ?> createEditorDriver()
+  {
+    EditorDriver driver = GWT.create(EditorDriver.class);
+    driver.initialize(this);
+    return driver;
+  }
+
+  @Override
+  public Widget asWidget()
+  {
+    return binder.createAndBindUi(this);
+  }
+
+  @UiHandler("btnStep")
   void onCodeLoad(AttachEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().init();
+    if (getUiHandlers() != null) {
+      getUiHandlers().init();
     }
   }
-	
-	@UiHandler("btnStep")
+
+  @UiHandler("btnStep")
   void onExecuteButtonClick(ClickEvent event) {
-		if (getUiHandlers() != null) {
-			getUiHandlers().step();
+    if (getUiHandlers() != null) {
+      getUiHandlers().step();
+    }
+  }
+  
+  @UiHandler("btnReset")
+  void onResetButtonClick(ClickEvent event) {
+    if (getUiHandlers() != null) {
+      getUiHandlers().reset();
     }
   }
 }

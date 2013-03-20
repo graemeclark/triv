@@ -17,8 +17,5 @@ public interface InputUiHandlers extends UiHandlers
 	//List<String> handleComponents(String component);
 	List<CodeVectorType> compile(String source)
 			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException, NoSourceCodeException;
-	void setParser(String name);
-	void setLexer(String name);
-	void setPattern(String name);
 	void execute();
 }

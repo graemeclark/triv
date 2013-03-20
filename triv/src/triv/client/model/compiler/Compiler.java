@@ -10,44 +10,44 @@ import triv.client.model.strategy.pattern.TRIVPatternStrategy;
 
 public class Compiler
 {
-	
-	public ParserStrategy parser;
-	private LexerStrategy lex;
-	
-	public Compiler()
-	{	
-		setParserStrategy(new TRIVParserStrategy());
-		setLexerStrategy(new TRIVLexerStrategy());
-		setPatternStrategy(new TRIVPatternStrategy());		
-	}
-	
-	public void setParserStrategy(ParserStrategy p)
-	{
-		
-		parser = p;
-		
-	}
-	
-	public void setLexerStrategy(LexerStrategy l)
-	{
-		
-		lex = l;
-		
-	}
-	
-	public void setPatternStrategy(PatternStrategy p)
-	{
-		
-		lex.setPatternStrategy(p);
-		
-	}
-	
-	public List<CodeVectorType> compile(String source)
-			throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException
-	{
-		
-		return parser.parse(lex, source);
-		
-	}
+
+  public ParserStrategy parser;
+  private LexerStrategy lex;
+
+  public Compiler()
+  {	
+    setParserStrategy(new TRIVParserStrategy());
+    setLexerStrategy(new TRIVLexerStrategy());
+    setPatternStrategy(new TRIVPatternStrategy());
+  }
+
+  public void setParserStrategy(ParserStrategy p)
+  {
+
+    parser = p;
+
+  }
+
+  public void setLexerStrategy(LexerStrategy l)
+  {
+
+    lex = l;
+
+  }
+
+  public void setPatternStrategy(PatternStrategy p)
+  {
+
+    lex.setPatternStrategy(p);
+
+  }
+
+  public List<CodeVectorType> compile(String source)
+      throws SymbolNotFoundException, IllegalCharacterException, IdentifierNotDeclaredException
+      {
+
+        return parser.parse(lex, source);
+
+      }
 
 }

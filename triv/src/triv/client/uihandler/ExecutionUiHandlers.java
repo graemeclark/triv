@@ -6,9 +6,11 @@ import com.gwtplatform.mvp.client.UiHandlers;
 
 public interface ExecutionUiHandlers extends UiHandlers
 {
-	void onExecuteEvent(ExecuteEvent event);
+  void onExecuteEvent(ExecuteEvent event);
 
-	void step();
+  void step();
 
-	void init();
+  void init();
+
+  void reset();
 }

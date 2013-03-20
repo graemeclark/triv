@@ -27,7 +27,7 @@ public class InputPresenter extends
 	
 	public interface InputView extends View, HasUiHandlers<InputUiHandlers> {}
 	
-	@ProxyCodeSplit
+  @ProxyCodeSplit
   @NameToken("in")
   public interface InputProxy extends ProxyPlace<InputPresenter> {}
 	
@@ -63,27 +63,6 @@ public class InputPresenter extends
 	public void execute()
 	{
 		ExecuteEvent.fire(this, codeVector);
-	}
-
-	@Override
-	public void setParser(String name)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setLexer(String name)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setPattern(String name)
-	{
-		// TODO Auto-generated method stub
-		
 	}
 
 }

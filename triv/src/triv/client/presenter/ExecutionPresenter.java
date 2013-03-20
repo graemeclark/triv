@@ -23,57 +23,72 @@ import triv.client.model.runtime.types.Machine;
 import triv.client.uihandler.ExecutionUiHandlers;
 
 public class ExecutionPresenter extends
-	Presenter<ExecutionPresenter.ExecutionView, ExecutionPresenter.ExecutionProxy>
-  	implements ExecutionUiHandlers
+Presenter<ExecutionPresenter.ExecutionView, ExecutionPresenter.ExecutionProxy>
+implements ExecutionUiHandlers
 {
-	
-	public interface ExecutionView extends EditView<Machine>, HasUiHandlers<ExecutionUiHandlers> {}
-	
-	@ProxyCodeSplit
-	@NameToken("exe")
-  public interface ExecutionProxy extends ProxyPlace<ExecutionPresenter> {}
-	
-	PlaceManager placeManager;
-	SimpleBeanEditorDriver<Machine, ?> editorDriver;
-	Machine machine;
-	List<CodeVectorType> codeVector;
-		
-	@Inject
-	public ExecutionPresenter(EventBus eventBus, ExecutionView view, ExecutionProxy proxy, PlaceManager places)
-	{
-		super(eventBus, view, proxy);
-		this.placeManager = places;
-		getView().setUiHandlers(this);
-		prepareFromRequest(null);
-		editorDriver = this.getView().createEditorDriver();
-	}
 
-	@Override
-	protected void revealInParent()
-	{
-		RevealRootContentEvent.fire( this, this );
-	}
-	
-	@ProxyEvent
-	@Override
-	public void onExecuteEvent(ExecuteEvent event) {
-	  PlaceRequest request = new PlaceRequest("exe");
-	  placeManager.revealPlace(request);
-	  
-	  codeVector = event.getCodeVector();
-		machine = new TRIVMachine();
-		machine.setCodeVector(codeVector);
-	}
-	
-	public void init()
-	{
-		editorDriver.edit(machine);
-	}
-	
-	public void step()
-	{
-		machine.execute();
-		editorDriver.edit(machine);
-	}
-	
+  public interface ExecutionView extends EditView<Machine>, HasUiHandlers<ExecutionUiHandlers> {}
+
+  @ProxyCodeSplit
+  @NameToken("exe")
+  public interface ExecutionProxy extends ProxyPlace<ExecutionPresenter> {}
+
+  PlaceManager placeManager;
+  SimpleBeanEditorDriver<Machine, ?> editorDriver;
+  Machine machine;
+  List<CodeVectorType> codeVector;
+
+  @Inject
+  public ExecutionPresenter(EventBus eventBus, ExecutionView view, ExecutionProxy proxy, PlaceManager places)
+  {
+    super(eventBus, view, proxy);
+    this.placeManager = places;
+    getView().setUiHandlers(this);
+    prepareFromRequest(null);
+    editorDriver = this.getView().createEditorDriver();
+  }
+
+  @Override
+  protected void revealInParent()
+  {
+    RevealRootContentEvent.fire( this, this );
+  }
+  
+  @Override
+  public void prepareFromRequest(PlaceRequest placeRequest)
+  {
+    if (codeVector == null) {
+      placeManager.revealPlace(new PlaceRequest("in"));
+    }
+  }
+
+  @ProxyEvent
+  @Override
+  public void onExecuteEvent(ExecuteEvent event) {
+    PlaceRequest request = new PlaceRequest("exe");
+    placeManager.revealPlace(request);
+
+    codeVector = event.getCodeVector();
+    machine = new TRIVMachine();
+    machine.setCodeVector(codeVector);
+  }
+
+  public void init()
+  {
+    editorDriver.edit(machine);
+  }
+
+  public void step()
+  {
+    machine.execute();
+    editorDriver.edit(machine);
+  }
+
+  @Override
+  public void reset()
+  {
+    machine.reset();
+    editorDriver.edit(machine);
+  }
+
 }
