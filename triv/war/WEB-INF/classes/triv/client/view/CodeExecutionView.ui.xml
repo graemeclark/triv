@@ -13,6 +13,10 @@
 			font-size: 16pt;
 		}
 		
+		.top-pad {
+			padding: 5px 0px 5px 0px;
+		}
+		
 		.pad {
 			padding: 5px 0px 100px 0px;
 		}
@@ -24,11 +28,13 @@
 	</ui:style>
 	<g:VerticalPanel styleName='{style.centerStyle}'>
 
-		<g:HorizontalPanel ui:field="codePanel" width="1000px" styleName='{style.pad}'>
-			<!--<g:Cell horizontalAlignment="ALIGN_CENTER">
-				<g:Label ui:field="code" width="1000px" styleName='{style.label}' />
-			</g:Cell> -->
+		<g:HorizontalPanel ui:field="codePanel1" width="1000px" styleName='{style.top-pad}'>
 		</g:HorizontalPanel>
+		<g:HorizontalPanel ui:field="codePanel2" width="1000px" styleName='{style.top-pad}'>
+		</g:HorizontalPanel>
+		<g:HorizontalPanel ui:field="codePanel3" width="1000px" styleName='{style.pad}'>
+		</g:HorizontalPanel>
+		
 
 
 		<g:HorizontalPanel width="1000px" >

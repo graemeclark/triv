@@ -35,7 +35,13 @@ implements ExecutionPresenter.ExecutionView
   List<String> codeVector;
   
   @UiField
-  HorizontalPanel codePanel;
+  HorizontalPanel codePanel1;
+  
+  @UiField
+  HorizontalPanel codePanel2;
+  
+  @UiField
+  HorizontalPanel codePanel3;
 
   @UiField
   Label codePointer;
@@ -107,20 +113,37 @@ implements ExecutionPresenter.ExecutionView
   
   void populateCodeVectorPanel()
   {
-    codePanel.clear();
+  	String c = "";
+    codePanel1.clear();
+    codePanel2.clear();
+    codePanel3.clear();
+    
     for (int i = 0; i < codeVector.size(); i++) {
-      String c = codeVector.get(i);
+    	c = codeVector.get(i);
+
       HTML label = new HTML();
       label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
       int cp = Integer.parseInt(codePointer.getText());
+      
       if (cp == i) {
         label.setHTML("<span style=\"font-size: 16pt; color:red\">" + c + "</span>");
       }
       else {
         label.setHTML("<span style=\"font-size: 16pt;\">" + c + "</span>");
       }
-      codePanel.add(label);
-      codePanel.setCellWidth(label, Integer.toString(1000 / codeVector.size()));
+      
+      if (i > 16) {
+        codePanel3.add(label);
+        codePanel3.setCellWidth(label, Integer.toString(1000 / codeVector.size()));
+      }
+      else if (i > 8) {
+        codePanel2.add(label);
+        codePanel2.setCellWidth(label, Integer.toString(1000 / codeVector.size()));
+      }
+      else {
+        codePanel1.add(label);
+        codePanel1.setCellWidth(label, Integer.toString(1000 / codeVector.size()));
+      }
     }
   }
 }

@@ -38,6 +38,16 @@ public class CodeVectorType
   {    
     return ins != null;   
   }
+  
+  public boolean isInt()
+  {    
+    return i != null;   
+  }
+  
+  public boolean isBool()
+  {    
+    return b != null;   
+  }
 	
   public Instruction getIns()
   {  

@@ -23,7 +23,7 @@ public class Symbol
 	public Symbol(String string)
 	{	
 		s = string;
-		type = "stringLiteral";		
+		type = string;		
 	}
 	
 	public Symbol(Boolean bool)

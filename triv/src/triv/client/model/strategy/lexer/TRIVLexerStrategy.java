@@ -49,7 +49,7 @@ public class TRIVLexerStrategy implements LexerStrategy
       }
 
       else if (patternStrategy.hasEquality()) {
-        symbol = new Symbol("==", "==");
+        symbol = new Symbol("==");
         slice(2);
       }
 
@@ -57,6 +57,9 @@ public class TRIVLexerStrategy implements LexerStrategy
         c = source.charAt(0);
         symbol = new Symbol(punctuator(c), c.toString());
       }
+    }
+    else {
+    	symbol = new Symbol("end of program");
     }
     setCurrentSymbol(symbol);
   }
@@ -105,9 +108,8 @@ public class TRIVLexerStrategy implements LexerStrategy
       nextSymbol();
     }
     else {
-      throw new SymbolNotFoundException("error: " + currentSymbol.getType() +
-          " [" + currentSymbol.getValue() +
-          "]" + " found where [" + s + "] expected.");
+      throw new SymbolNotFoundException(currentSymbol.getValue() + 
+      		" found where " + s + " expected.");
     }
 
       }
