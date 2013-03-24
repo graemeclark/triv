@@ -21,48 +21,48 @@ import triv.client.model.runtime.types.CodeVectorType;
 import triv.client.uihandler.InputUiHandlers;
 
 public class InputPresenter extends
-	Presenter<InputPresenter.InputView, InputPresenter.InputProxy>
-  	implements InputUiHandlers
+Presenter<InputPresenter.InputView, InputPresenter.InputProxy>
+implements InputUiHandlers
 {
-	
-	public interface InputView extends View, HasUiHandlers<InputUiHandlers> {}
-	
+
+  public interface InputView extends View, HasUiHandlers<InputUiHandlers> {}
+
   @ProxyCodeSplit
   @NameToken("in")
   public interface InputProxy extends ProxyPlace<InputPresenter> {}
-	
-	Compiler compiler = new Compiler();
-	List<CodeVectorType> codeVector;
-	
-	@Inject
-	public InputPresenter(EventBus eventBus, InputView view, InputProxy proxy)
-	{
-		super(eventBus, view, proxy);
-		getView().setUiHandlers(this);
-	}
 
-	@Override
-	protected void revealInParent()
-	{
-		RevealRootContentEvent.fire( this, this );
-	}
-	
-	@Override
-	public List<CodeVectorType> compile(String source)
-			throws SymbolNotFoundException, IllegalCharacterException,
-			       IdentifierNotDeclaredException, NoSourceCodeException
-	{
-		if (source.equals("")) {
-			throw new NoSourceCodeException("No source code input.");
-		}
-		codeVector = compiler.compile(source);
-		return codeVector;
-	}
-	
-	@Override
-	public void execute()
-	{
-		ExecuteEvent.fire(this, codeVector);
-	}
+  Compiler compiler = new Compiler();
+  List<CodeVectorType> codeVector;
+
+  @Inject
+  public InputPresenter(EventBus eventBus, InputView view, InputProxy proxy)
+  {
+    super(eventBus, view, proxy);
+    getView().setUiHandlers(this);
+  }
+
+  @Override
+  protected void revealInParent()
+  {
+    RevealRootContentEvent.fire( this, this );
+  }
+
+  @Override
+  public List<CodeVectorType> compile(String source)
+      throws SymbolNotFoundException, IllegalCharacterException,
+      IdentifierNotDeclaredException, NoSourceCodeException
+      {
+    if (source.equals("")) {
+      throw new NoSourceCodeException("No source code input.");
+    }
+    codeVector = compiler.compile(source);
+    return codeVector;
+      }
+
+  @Override
+  public void execute()
+  {
+    ExecuteEvent.fire(this, codeVector);
+  }
 
 }

@@ -1,5 +1,6 @@
 package triv.client.presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
@@ -22,6 +23,10 @@ import triv.client.model.runtime.types.CodeVectorType;
 import triv.client.model.runtime.types.Machine;
 import triv.client.uihandler.ExecutionUiHandlers;
 
+/**
+ * @author graeme
+ *
+ */
 public class ExecutionPresenter extends
 Presenter<ExecutionPresenter.ExecutionView, ExecutionPresenter.ExecutionProxy>
 implements ExecutionUiHandlers
@@ -73,11 +78,17 @@ implements ExecutionUiHandlers
     machine.setCodeVector(codeVector);
   }
 
-  public void init()
+  public List<String> init()
   {
     editorDriver.edit(machine);
+    List<String> c = new ArrayList<String>();
+    for (CodeVectorType cv : codeVector) {
+      c.add(cv.toString());
+    }
+    return c;
   }
 
+  @Override
   public void step()
   {
     machine.execute();

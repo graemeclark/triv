@@ -1,5 +1,7 @@
 package triv.client.view;
 
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -8,6 +10,9 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -27,8 +32,10 @@ implements ExecutionPresenter.ExecutionView
   private static final Binder binder = GWT.create(Binder.class);
   public interface EditorDriver extends SimpleBeanEditorDriver<Machine, CodeExecutionView> { }
 
+  List<String> codeVector;
+  
   @UiField
-  Label code;
+  HorizontalPanel codePanel;
 
   @UiField
   Label codePointer;
@@ -77,7 +84,8 @@ implements ExecutionPresenter.ExecutionView
   @UiHandler("btnStep")
   void onCodeLoad(AttachEvent event) {
     if (getUiHandlers() != null) {
-      getUiHandlers().init();
+      codeVector = getUiHandlers().init();
+      this.populateCodeVectorPanel();
     }
   }
 
@@ -85,6 +93,7 @@ implements ExecutionPresenter.ExecutionView
   void onExecuteButtonClick(ClickEvent event) {
     if (getUiHandlers() != null) {
       getUiHandlers().step();
+      this.populateCodeVectorPanel();
     }
   }
   
@@ -92,6 +101,26 @@ implements ExecutionPresenter.ExecutionView
   void onResetButtonClick(ClickEvent event) {
     if (getUiHandlers() != null) {
       getUiHandlers().reset();
+      this.populateCodeVectorPanel();
+    }
+  }
+  
+  void populateCodeVectorPanel()
+  {
+    codePanel.clear();
+    for (int i = 0; i < codeVector.size(); i++) {
+      String c = codeVector.get(i);
+      HTML label = new HTML();
+      label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+      int cp = Integer.parseInt(codePointer.getText());
+      if (cp == i) {
+        label.setHTML("<span style=\"font-size: 16pt; color:red\">" + c + "</span>");
+      }
+      else {
+        label.setHTML("<span style=\"font-size: 16pt;\">" + c + "</span>");
+      }
+      codePanel.add(label);
+      codePanel.setCellWidth(label, Integer.toString(1000 / codeVector.size()));
     }
   }
 }
