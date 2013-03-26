@@ -48,14 +48,9 @@ public class TRIVLexerStrategy implements LexerStrategy
         symbol = new Symbol(dQuote(), "stringLiteral");
       }
 
-      else if (patternStrategy.hasEquality()) {
-        symbol = new Symbol("==");
-        slice(2);
-      }
-
       else {
         c = source.charAt(0);
-        symbol = new Symbol(punctuator(c), c.toString());
+        symbol = new Symbol(punctuator(c));
       }
     }
     else {
@@ -94,8 +89,6 @@ public class TRIVLexerStrategy implements LexerStrategy
     }
 
   }
-
-
 
   public void mustBe(String s)
       throws SymbolNotFoundException, IllegalCharacterException
@@ -168,13 +161,26 @@ public class TRIVLexerStrategy implements LexerStrategy
   {
 
     switch(c) {
-    case '=' : slice(1); return c.toString();
+    case '=' : return tryNext(c, "==");
     case '+' : slice(1); return c.toString();
     case '(' : slice(1); return c.toString();
     case ')' : slice(1); return c.toString();
     default  : throw new IllegalCharacterException("lexical error - illegal character: " + c);
     }
 
+  }
+  
+  private String tryNext(Character c, String s)
+  {
+    slice(1);
+    String value = c.toString() + Character.toString(source.charAt(0));
+    if (s.equals(value)) {
+      slice(1);
+      return s;
+    }
+    else {
+      return c.toString();
+    }
   }
 
 

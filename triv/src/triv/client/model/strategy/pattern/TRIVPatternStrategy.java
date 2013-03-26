@@ -12,9 +12,8 @@ public class TRIVPatternStrategy implements PatternStrategy
 	protected static RegExp numeric    = RegExp.compile("\\d+");
 	protected static RegExp dQuote     = RegExp.compile("\"");
 	protected static RegExp newline    = RegExp.compile("\n");
-	protected static RegExp equality   = RegExp.compile("={2}?");
 	
-	protected MatchResult matchId, matchNum, matchDQuote, matchNewLine, matchEquality;
+	protected MatchResult matchId, matchNum, matchDQuote, matchNewLine;
 	
 	String s;
 	
@@ -74,15 +73,6 @@ public class TRIVPatternStrategy implements PatternStrategy
 	{
 		
 		return newline.test(s); // && matchNewLine.start() != -1;
-		
-	}
-	
-	@Override
-	public Boolean hasEquality()
-	{
-		
-		matchEquality = equality.exec(s);
-		return matchEquality != null && s.indexOf(matchEquality.getGroup(0)) == 0;
 		
 	}
 
