@@ -20,6 +20,23 @@ import triv.client.model.compiler.SymbolNotFoundException;
 import triv.client.model.runtime.types.CodeVectorType;
 import triv.client.uihandler.InputUiHandlers;
 
+/**
+ * The presenter for the input view.
+ * 
+ * Responsible for communicating with the compiler after various requests from the view,
+ * like the Step or Reset button presses.
+ * 
+ * Its Proxy listens for events on its behalf before initialisation.
+ * 
+ * The view and proxy are injected here by the InputModule class.
+ * 
+ * Adapted from code in the GWTP guide at:
+ * 
+ * http://code.google.com/p/gwt-platform/wiki/GettingStarted
+ * 
+ * @author Graeme Clark
+ *
+ */
 public class InputPresenter extends
 Presenter<InputPresenter.InputView, InputPresenter.InputProxy>
 implements InputUiHandlers

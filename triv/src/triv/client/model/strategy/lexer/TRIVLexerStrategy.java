@@ -170,7 +170,7 @@ public class TRIVLexerStrategy implements LexerStrategy
 
   }
   
-  private String tryNext(Character c, String s)
+  public String tryNext(Character c, String s)
   {
     slice(1);
     String value = c.toString() + Character.toString(source.charAt(0));

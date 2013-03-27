@@ -1,3 +1,19 @@
+/**
+ * Copyright 2010 ArcBees Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 package triv.client.place;
 
 import com.google.inject.BindingAnnotation;
@@ -11,9 +27,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used in {@link GwtptabsamplePlaceManager} and is bound in
- * {@link ClientModule} to a constant indicating the name token of the default place.
- *
+ * *Graeme Clark* - This is code from:
+ * http://meta-editor.googlecode.com/svn-history/r34/trunk/MEditor/src/cz/fi/muni/xkremser/editor/client/gin/DefaultPlace.java
+ * 
+ * This annotation is used in {@link GwtpnestedsamplePlaceManager} and is bind
+ * in {@link ClientModule}. It's purpose is to bind the default place to a
+ * default presenter.
+ * 
  * @author Christian Goudreau
  */
 @BindingAnnotation

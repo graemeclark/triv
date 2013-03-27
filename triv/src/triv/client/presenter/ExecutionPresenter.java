@@ -24,7 +24,20 @@ import triv.client.model.runtime.types.Machine;
 import triv.client.uihandler.ExecutionUiHandlers;
 
 /**
- * @author graeme
+ * The presenter for the execution view.
+ * 
+ * Responsible for communicating with the machine after various requests from the view,
+ * like the Step or Reset button presses.
+ * 
+ * Its Proxy listens for events on its behalf before initialisation.
+ * 
+ * The view and proxy are injected here by the InputModule class.
+ * 
+ * Adapted from code in the GWTP guide at:
+ * 
+ * http://code.google.com/p/gwt-platform/wiki/GettingStarted
+ * 
+ * @author Graeme Clark
  *
  */
 public class ExecutionPresenter extends
@@ -58,7 +71,7 @@ implements ExecutionUiHandlers
   {
     RevealRootContentEvent.fire( this, this );
   }
-  
+
   @Override
   public void prepareFromRequest(PlaceRequest placeRequest)
   {
@@ -78,6 +91,7 @@ implements ExecutionUiHandlers
     machine.setCodeVector(codeVector);
   }
 
+  @Override
   public List<String> init()
   {
     editorDriver.edit(machine);

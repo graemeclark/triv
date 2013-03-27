@@ -24,6 +24,22 @@ import triv.client.model.runtime.types.Machine;
 import triv.client.presenter.ExecutionPresenter;
 import triv.client.uihandler.ExecutionUiHandlers;
 
+/**
+ * The view class for the ExecutionPresenter.
+ * Implements the view interface defined inside
+ * the ExecutionPresenter so that it can be injected
+ * into it.
+ * 
+ * Links with the CodeExecutionView.ui.xml, where the
+ * UI layout is defined.
+ * 
+ * Adapted from the code in the GWTP guide at:
+ * 
+ * http://code.google.com/p/gwt-platform/wiki/GettingStarted
+ * 
+ * @author Graeme Clark
+ *
+ */
 public class CodeExecutionView
 extends ViewWithUiHandlers<ExecutionUiHandlers>
 implements ExecutionPresenter.ExecutionView
@@ -33,13 +49,13 @@ implements ExecutionPresenter.ExecutionView
   public interface EditorDriver extends SimpleBeanEditorDriver<Machine, CodeExecutionView> { }
 
   List<String> codeVector;
-  
+
   @UiField
   HorizontalPanel codePanel1;
-  
+
   @UiField
   HorizontalPanel codePanel2;
-  
+
   @UiField
   HorizontalPanel codePanel3;
 
@@ -48,7 +64,7 @@ implements ExecutionPresenter.ExecutionView
 
   @UiField
   Button btnStep;
-  
+
   @UiField
   Button btnReset; 
 
@@ -87,6 +103,12 @@ implements ExecutionPresenter.ExecutionView
     return binder.createAndBindUi(this);
   }
 
+  /**
+   * Populate the code vector panels when the
+   * Step button is loaded.
+   * 
+   * @param event
+   */
   @UiHandler("btnStep")
   void onCodeLoad(AttachEvent event) {
     if (getUiHandlers() != null) {
@@ -95,6 +117,12 @@ implements ExecutionPresenter.ExecutionView
     }
   }
 
+  /**
+   * Populate the code vector panels when the
+   * Step button is pressed.
+   * 
+   * @param event
+   */
   @UiHandler("btnStep")
   void onExecuteButtonClick(ClickEvent event) {
     if (getUiHandlers() != null) {
@@ -102,7 +130,13 @@ implements ExecutionPresenter.ExecutionView
       this.populateCodeVectorPanel();
     }
   }
-  
+
+  /**
+   * Populate the code vector panels when the
+   * Reset button is pressed.
+   * 
+   * @param event
+   */
   @UiHandler("btnReset")
   void onResetButtonClick(ClickEvent event) {
     if (getUiHandlers() != null) {
@@ -110,28 +144,33 @@ implements ExecutionPresenter.ExecutionView
       this.populateCodeVectorPanel();
     }
   }
-  
-  void populateCodeVectorPanel()
+
+  /**
+   * Populate the code vector panels.
+   * Puts the first 8 elements into the top panel, then
+   * 8 into the second, then the rest into the third.
+   */
+  private void populateCodeVectorPanel()
   {
-  	String c = "";
+    String c = "";
     codePanel1.clear();
     codePanel2.clear();
     codePanel3.clear();
-    
+
     for (int i = 0; i < codeVector.size(); i++) {
-    	c = codeVector.get(i);
+      c = codeVector.get(i);
 
       HTML label = new HTML();
       label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
       int cp = Integer.parseInt(codePointer.getText());
-      
+
       if (cp == i) {
         label.setHTML("<span style=\"font-size: 16pt; color:red\">" + c + "</span>");
       }
       else {
         label.setHTML("<span style=\"font-size: 16pt;\">" + c + "</span>");
       }
-      
+
       if (i > 16) {
         codePanel3.add(label);
         codePanel3.setCellWidth(label, Integer.toString(1000 / codeVector.size()));

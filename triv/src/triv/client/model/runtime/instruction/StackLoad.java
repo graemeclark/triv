@@ -1,8 +1,13 @@
 package triv.client.model.runtime.instruction;
 
-import triv.client.model.runtime.types.Instruction;
-import triv.client.model.runtime.types.Machine;
+import triv.client.model.runtime.types.*;
 
+/**
+ * Pushes a value at the stack address given by the parameter
+ * on the code vector back onto the top of stack.
+ * @author Graeme Clark
+ *
+ */
 public class StackLoad implements Instruction
 {
 	Machine machine;

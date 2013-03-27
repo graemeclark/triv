@@ -2,10 +2,15 @@ package triv.client.model.runtime.instruction;
 
 import java.util.EmptyStackException;
 
-import triv.client.model.runtime.types.HeapType;
-import triv.client.model.runtime.types.Instruction;
-import triv.client.model.runtime.types.Machine;
+import triv.client.model.runtime.types.*;
 
+/**
+ * Pops two elements from the stack, compares them, and pushes
+ * the result back on.
+ * 
+ * @author Graeme Clark
+ *
+ */
 public class EqualOp implements Instruction
 {	
 	Machine machine;

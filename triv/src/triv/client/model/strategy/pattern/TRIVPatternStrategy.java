@@ -7,121 +7,121 @@ import triv.client.model.strategy.interfaces.*;
 
 public class TRIVPatternStrategy implements PatternStrategy
 {
-	
-	protected static RegExp identifier = RegExp.compile("[a-zA-Z][a-zA-Z0-9]*");
-	protected static RegExp numeric    = RegExp.compile("\\d+");
-	protected static RegExp dQuote     = RegExp.compile("\"");
-	protected static RegExp newline    = RegExp.compile("\n");
-	
-	protected MatchResult matchId, matchNum, matchDQuote, matchNewLine;
-	
-	String s;
-	
-	@Override
-	public void setMatchers(String source)
-	{
-  	
-  	  s = source;
-		
-	}
 
-	@Override
-	public void setIntegerPattern(String pattern)
-	{
-		
-		numeric = RegExp.compile(pattern);
-		
-	}
+  protected static RegExp identifier = RegExp.compile("[a-zA-Z][a-zA-Z0-9]*");
+  protected static RegExp numeric    = RegExp.compile("\\d+");
+  protected static RegExp dQuote     = RegExp.compile("\"");
+  protected static RegExp newline    = RegExp.compile("\n");
 
-	@Override
-	public void setIdentifierPattern(String pattern)
-	{
-		
-		identifier = RegExp.compile(pattern);
-		
-	}
+  protected MatchResult matchId, matchNum, matchDQuote, matchNewLine;
 
-	@Override
-	public Boolean hasNum()
-	{
-		
-		matchNum = numeric.exec(s);
-		return matchNum != null && s.indexOf(matchNum.getGroup(0)) == 0;
-		
-	}
+  String s;
 
-	@Override
-	public Boolean hasId()
-	{
+  @Override
+  public void setMatchers(String source)
+  {
 
-		matchId = identifier.exec(s);
-		return matchId != null && s.indexOf(matchId.getGroup(0)) == 0;
-		
-	}
+    s = source;
 
-	@Override
-	public Boolean hasDQuote()
-	{
-		
-		matchDQuote = dQuote.exec(s);
-		return matchDQuote != null && s.indexOf(matchDQuote.getGroup(0)) == 0;
-		
-	}
+  }
 
-	@Override
-	public Boolean hasNewLine()
-	{
-		
-		return newline.test(s); // && matchNewLine.start() != -1;
-		
-	}
+  @Override
+  public void setIntegerPattern(String pattern)
+  {
 
-	@Override
-	public Integer closingDQuoteIndex()
-	{
-		
-		return dQuote.getLastIndex();
-		
-	}
+    numeric = RegExp.compile(pattern);
 
-	@Override
-	public Integer idEnd()
-	{
-		
-		return matchId.getGroup(0).length();
-		
-	}
+  }
 
-	@Override
-	public Integer numEnd()
-	{
-		
-		return matchNum.getGroup(0).length();
-		
-	}
+  @Override
+  public void setIdentifierPattern(String pattern)
+  {
 
-	@Override
-	public String matchingId()
-	{
-		
-		return matchId.getGroup(0);
-		
-	}
+    identifier = RegExp.compile(pattern);
 
-	@Override
-	public String matchingNum()
-	{
-		
-		return matchNum.getGroup(0);
-		
-	}
+  }
 
-	@Override
-	public Boolean findDQuote()
-	{
-		
-		return dQuote.test(s);
-		
-	}
+  @Override
+  public Boolean hasNum()
+  {
+
+    matchNum = numeric.exec(s);
+    return matchNum != null && s.indexOf(matchNum.getGroup(0)) == 0;
+
+  }
+
+  @Override
+  public Boolean hasId()
+  {
+
+    matchId = identifier.exec(s);
+    return matchId != null && s.indexOf(matchId.getGroup(0)) == 0;
+
+  }
+
+  @Override
+  public Boolean hasDQuote()
+  {
+
+    matchDQuote = dQuote.exec(s);
+    return matchDQuote != null && s.indexOf(matchDQuote.getGroup(0)) == 0;
+
+  }
+
+  @Override
+  public Boolean hasNewLine()
+  {
+
+    return newline.test(s); // && matchNewLine.start() != -1;
+
+  }
+
+  @Override
+  public Integer closingDQuoteIndex()
+  {
+
+    return dQuote.getLastIndex();
+
+  }
+
+  @Override
+  public Integer idEnd()
+  {
+
+    return matchId.getGroup(0).length();
+
+  }
+
+  @Override
+  public Integer numEnd()
+  {
+
+    return matchNum.getGroup(0).length();
+
+  }
+
+  @Override
+  public String matchingId()
+  {
+
+    return matchId.getGroup(0);
+
+  }
+
+  @Override
+  public String matchingNum()
+  {
+
+    return matchNum.getGroup(0);
+
+  }
+
+  @Override
+  public Boolean findDQuote()
+  {
+
+    return dQuote.test(s);
+
+  }
 
 }

@@ -3,13 +3,13 @@ package triv.client.model.runtime.machine;
 import java.util.*;
 
 import triv.client.model.runtime.types.CodeVectorType;
-import triv.client.model.runtime.types.HeapType;
-import triv.client.model.runtime.types.Machine;
+import triv.client.model.runtime.types.*;
 
 public class TRIVMachine implements Machine
 {	
   protected int codePointer, stackPointer, heapPointer;
 
+  protected Processor               cpu;
   protected Stack <Integer>         stack;
   protected List  <CodeVectorType>  codeVector;
   protected List  <HeapType>		heap;
@@ -25,6 +25,8 @@ public class TRIVMachine implements Machine
     codeVector  = new ArrayList <CodeVectorType>();
     heap        = new ArrayList <HeapType>();
     result      = new HeapType(0);
+    
+    cpu = new TRIVProcessor();
   }
 
   public String toString()
@@ -35,7 +37,8 @@ public class TRIVMachine implements Machine
         "Heap:        " + heap         + "\n" +
         "SP:          " + stackPointer + "\n" +
         "CP:          " + codePointer  + "\n" +
-        "HP:          " + heapPointer  + "\n" ;
+        "HP:          " + heapPointer  + "\n" +
+        "Result:      " + result       + "\n" ;
   }
 
   @Override
@@ -43,7 +46,7 @@ public class TRIVMachine implements Machine
   {
     if (codePointer < codeVector.size()) {
       if (codeVector.get(codePointer).isInstruction()) {
-        codeVector.get(codePointer).getIns().executeInstruction();
+        cpu.execute(codeVector.get(codePointer).getIns());
         codePointer++;
       }
     }
@@ -120,6 +123,18 @@ public class TRIVMachine implements Machine
   }
 
   @Override
+  public List<CodeVectorType> getCodeVector()
+  {
+    return codeVector;
+  }
+
+  @Override
+  public Integer getCurrentCodePointer()
+  {
+    return codePointer;
+  }
+  
+  @Override
   public String getResult()
   {
     return result.toString();
@@ -160,18 +175,5 @@ public class TRIVMachine implements Machine
   {
     return codeVector.toString();
   }
-
-  @Override
-  public List<CodeVectorType> getCodeVector()
-  {
-    return codeVector;
-  }
-
-  @Override
-  public Integer getCurrentCodePointer()
-  {
-    return codePointer;
-  }
-
 
 }
