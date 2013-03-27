@@ -2,18 +2,6 @@
 
   <!-- Servlets -->
   
-  <!-- Servlet for populating combo boxes and creating compiler components -->
-  <servlet>
-    <servlet-name>ClassRetriever</servlet-name>
-    <servlet-class>
-      triv.server.ClassRetriever
-    </servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ClassRetriever</servlet-name>
-    <url-pattern>/triv/io</url-pattern>
-  </servlet-mapping>
-  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Triv.html</welcome-file>
